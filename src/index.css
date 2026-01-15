@@ -1,4 +1,96 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Georgia:wght@400;200;700&display=swap');
+/* Single Tailwind import for v4 */
+@import "tailwindcss";
 
+/* Configure your theme in CSS */
+@theme {
+  --font-family-sans: 'Inter', sans-serif;
+}
+
+/* Dynamic CSS variables that will be updated by JavaScript */
+:root {
+  /* These will be dynamically set by the ThemeProvider */
+  --color-background: #0a0a0a;
+  --color-foreground: #fafafa;
+  --color-card: #31572c;
+  --color-card-foreground: #ecf39e;
+  --color-primary: #4f772d;
+  --color-primary-foreground: #ecf39e;
+  --color-secondary: #90a955;
+  --color-secondary-foreground: #132a13;
+  --color-accent: #90a955;
+  --color-accent-foreground: #132a13;
+  --color-muted: #31572c;
+  --color-muted-foreground: #90a955;
+  --color-border: #4f772d;
+  --color-ring: #90a955;
+  --color-gradient-from: #4f772d;
+  --color-gradient-via: #90a955;
+  --color-gradient-to: #ecf39e;
+}
+
+@layer base {
+  html {
+    font-family: 'Inter', sans-serif;
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+@keyframes scroll-x {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-scroll-x {
+  animation: scroll-x linear infinite;
+}
+
+/* Enhanced glassy effect styles */
+.backdrop-blur-md {
+  backdrop-filter: blur(12px);
+}
+
+/* Smooth text animation keyframes */
+@keyframes slideUpText {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Enhanced scroll animation */
+@keyframes scroll-x {
+  0% { 
+    transform: translateX(0); 
+  }
+  100% { 
+    transform: translateX(-50%); 
+  }
+}
+
+.animate-scroll-x {
+  animation: scroll-x linear infinite;
+}
+
+/* Glassy card effects for project sections */
+.glass-card {
+  backdrop-filter: blur(16px);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
