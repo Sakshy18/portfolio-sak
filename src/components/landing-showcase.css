@@ -1,0 +1,56 @@
+.clay-section {
+  background: black;
+  min-height: 80vh;
+}
+
+.clay-frame {
+  width: min(80vw, 1100px);
+  aspect-ratio: 16 / 10;
+  position: relative;
+}
+
+.clay-card {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 28px;
+  backface-visibility: hidden;
+  box-shadow: 0 50px 120px rgba(0,0,0,.6);
+  background: black;
+}
+.clay-stage {
+  perspective: 2000px;
+}
+
+.clay-sticky {
+  position: sticky;
+  top: 0;
+   min-height: 100vh;        /* NOT height */
+  padding-top: 8vh;        /* breathing room for heading */
+  padding-bottom: 8vh;  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+}
+
+.clay-heading {
+  text-align: center;
+  max-width: 800px;
+}
+
+.clay-heading h2 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 600;
+  color: white;
+}
+
+.clay-heading p {
+  margin-top: 12px;
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.6);
+}
+

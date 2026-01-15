@@ -2,7 +2,7 @@ import AnimatedTagCarousel from "./AnimatedTagCarousel";
 
 export default function HeroSection() {
   return (
-    <section className="relative flex flex-col items-center justify-center text-center min-h-[55vh] pb-8">
+    <section className="relative flex flex-col items-center justify-center text-center min-h-[80vh] pb-8">
       {/* Animated Tag Carousel with glassy effect */}
       <div className="mt-6 mb-2 w-full max-w-96 relative">
         <AnimatedTagCarousel />

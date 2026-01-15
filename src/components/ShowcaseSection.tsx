@@ -1,17 +1,22 @@
 import DesignPortfolio from "../pages/DesignPortfolio.tsx";
-import FrontendProjects from "../pages/FrontendProjects.tsx";
-
+import "./landing-showcase.css";
 export default function ShowcaseSection() {
   return (
-    <main className="max-w-5xl mx-auto px-4">
-      <section id="design" className="mb-20">
-        <h2 className="text-3xl font-bold mb-8">Design Portfolio</h2>
+    <section id="design" className="w-full px-8 mt-32">
+   <div className="flex flex-col items-center mb-16">
+     <div className="text-6xl bg-clip-text text-transparent"  style={{fontFamily: "'Georgia', serif" , fontWeight: 500,
+            backgroundImage: `linear-gradient(45deg, var(--color-gradient-from), var(--color-gradient-via), var(--color-gradient-to))`
+          }}>
+        <h2>End to End designs</h2>
+       
+      </div>
+       <p className="text-2xl mt-1.5 text-gray-400 ">One of the top projects</p>
+   </div>
+      <div className="max-w-[1400px] mx-auto">
         <DesignPortfolio />
-      </section>
-      <section id="frontend">
-        <h2 className="text-3xl font-bold mb-8">Frontend Projects</h2>
-        <FrontendProjects />
-      </section>
-    </main>
+      </div>
+
+    
+    </section>
   );
 }
