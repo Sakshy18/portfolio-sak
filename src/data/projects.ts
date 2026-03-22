@@ -38,8 +38,8 @@ export const projects: Project[] = [
     cover: "/assets/griffy-app-baner.svg"
   },
   {
-    slug: "fanta-app",
-    title: "Fanta App",
+    slug: "fanta-website",
+    title: "Fanta Website",
     cover: "/assets/fanta-web-banner.svg"
   },
    {

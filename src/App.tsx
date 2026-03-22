@@ -1,21 +1,20 @@
 import { ThemeProvider } from "./contexts/ThemeContext";
-// import ThemeSelector from "./components/ThemeSelector";
 import Footer from "./components/Footer";
 import HeroSection from "./components/HeroSection";
 import Navbar from "./components/Navbar";
 import ShowcaseSection from "./components/ShowcaseSection";
-import Cursor from "./components/Cursor";
 
 import { Routes, Route } from "react-router-dom";
 import ProjectDetail from "./pages/ProjectDetail";
 import LandingPageShowcase from "./components/LandingPageShowcase";
 import StayAheadCarousel from "./components/StayAheadCarousel";
 import Designs from "./pages/Designs";
+import SplashCursor from "./components/SplashCursor";
 
 function App() {
   return (
     <ThemeProvider>
-      <Cursor />
+    <SplashCursor />
       <Routes>
         <Route
           path="/"

@@ -1,0 +1,179 @@
+.showcase-grid-section {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: black;
+  padding: clamp(2rem, 4vw, 3.5rem) clamp(1.25rem, 3vw, 2.5rem) clamp(4rem, 8vw, 6rem);
+}
+
+.showcase-splash-cursor {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.9;
+}
+
+.showcase-grid-shell {
+  position: relative;
+  z-index: 1;
+  width: min(1500px, 100%);
+  margin: 0 auto;
+}
+
+.showcase-pill {
+  margin-bottom: 2.25rem;
+  padding: 0.9rem 2rem;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(10px);
+}
+
+.showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 1.4rem;
+}
+
+.showcase-project-card {
+
+  position: relative;
+  border-radius: 1.5rem;
+  overflow: hidden;
+grid-column: span 6;
+  /* Adjust the height to be shorter than a square but wider */
+  aspect-ratio: 16 / 9; 
+  min-height: auto; /* Remove the old clamp min-height */
+  background:
+    linear-gradient(160deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.02)),
+    rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 22px 50px rgba(0, 0, 0, 0.34);
+  backdrop-filter: blur(8px);
+}
+
+.showcase-project-card:nth-child(-n + 3),
+.showcase-project-card:nth-child(n + 4) {
+  grid-column: span 6;
+}
+
+.showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 1.4rem;
+}
+
+
+/* Image fills the container */
+.showcase-project-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  background: #000;
+  height: 100%;
+}
+
+.showcase-project-img {
+
+  object-fit: cover; 
+  /* Optional: keeps the image at the top if there's extra space */
+  object-position: center;
+  width: 100%;
+  height: 100%;
+
+  transition: transform 0.5s ease;
+}
+
+/* Dark overlay that appears on hover */
+.showcase-project-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.2) 60%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.showcase-project-copy {
+  position: absolute;
+  left: 1.5rem;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 2;
+  opacity: 0; /* Hidden by default */
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+/* Hover States */
+.showcase-project-card:hover .showcase-project-overlay {
+  opacity: 1;
+}
+
+.showcase-project-card:hover .showcase-project-copy {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.showcase-project-card:hover .showcase-project-img {
+  transform: scale(1.05); /* Slight zoom for extra polish */
+}
+
+.showcase-project-copy h3 {
+  margin: 0 0 0.45rem;
+  font-size: clamp(1.4rem, 2.7vw, 2.15rem);
+  line-height: 1.1;
+  font-weight: 500;
+  color: #f8fafc;
+}
+
+.showcase-project-copy p {
+  margin: 0;
+  font-size: clamp(0.92rem, 1.3vw, 1.12rem);
+  line-height: 1.25;
+  color: rgba(238, 242, 255, 0.9);
+  max-width: 90%;
+}
+
+
+@media (max-width: 1024px) {
+  .showcase-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .showcase-project-card:nth-child(-n + 3),
+  .showcase-project-card:nth-child(n + 4) {
+    grid-column: span 1;
+  }
+
+  .showcase-project-card:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 640px) {
+  .showcase-project-card {
+    grid-column: span 12; /* One per row on mobile */
+    aspect-ratio: auto;
+    min-height: 250px;
+  }
+  .showcase-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .showcase-project-card:last-child {
+    grid-column: span 1;
+  }
+
+  .showcase-project-copy p {
+    max-width: 100%;
+  }
+}
