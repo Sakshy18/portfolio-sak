@@ -7,10 +7,11 @@ import flip5 from "/assets/flip5.svg";
 import flip6 from "/assets/flip6.svg";
 import flip7 from "/assets/flip7.svg";
 import flip8 from "/assets/flip8.svg";
-import { useLayoutEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import GradientText from "./GradientText";
+import SuspenseImage from "./ui/SuspenseImage";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -19,6 +20,17 @@ const images = [flip1, flip2, flip3, flip4, flip5, flip6, flip7, flip8];
 export default function LandingCards() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLImageElement[]>([]);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      images.forEach((src) => {
+        const img = new Image();
+        img.src = src;
+      });
+    }, 0);
+
+    return () => window.clearTimeout(timer);
+  }, []);
 
   useLayoutEffect(() => {
     if (!sectionRef.current) return;
@@ -90,13 +102,15 @@ export default function LandingCards() {
         <div className="clay-stage">
           <div className="clay-frame">
             {images.map((flip, i) => (
-              <img
+              <SuspenseImage
                 key={i}
                 src={flip}
                 ref={(el) => {
                   if (el) cardsRef.current[i] = el;
                 }}
                 className="clay-card"
+                alt={`Landing design ${i + 1}`}
+                priority={i < 2}
               />
             ))}
           </div>

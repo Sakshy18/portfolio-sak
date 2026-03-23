@@ -3,6 +3,7 @@ import "./showcase-section.css";
 import { projectsData } from "../data/projectsData";
 import { Link } from "react-router-dom";
 import GradientText from "./GradientText";
+import SuspenseImage from "./ui/SuspenseImage";
 
 export default function ShowcaseSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -49,7 +50,7 @@ export default function ShowcaseSection() {
             >
               <article className="showcase-project-card">
                 <div className="showcase-project-media">
-                  <img 
+                  <SuspenseImage
                     src={project.image} 
                     alt={project.title} 
                     className="showcase-project-img" 

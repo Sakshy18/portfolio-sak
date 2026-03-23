@@ -2,6 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { projectsData } from "../data/projectsData";
 import { ChevronLeft, ExternalLink } from "lucide-react";
+import SuspenseImage from "@/components/ui/SuspenseImage";
 
 export default function ProjectDetail() {
   const { slug } = useParams();
@@ -130,10 +131,11 @@ export default function ProjectDetail() {
       /* Case 2: Image Hero (For TynTan / Stepout) */
       <div className="w-full aspect-video bg-[#0d0d0d] border border-white/10 rounded-[1.5rem] md:rounded-[3rem] overflow-hidden mb-8 md:mb-12 shadow-2xl relative flex items-center justify-center p-4 md:p-12">
         <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] to-transparent pointer-events-none" />
-        <img 
+        <SuspenseImage
           src={project.heroImage} 
           alt={`${project.title} Hero`} 
           className="w-full h-full object-contain rounded-2xl"
+          priority
         />
       </div>
     ) : null}
@@ -291,7 +293,7 @@ export default function ProjectDetail() {
                     `}
                         />
                       ) : (
-                        <img
+                        <SuspenseImage
                           src={item.imageUrl}
                           alt={item.title}
                           className={`

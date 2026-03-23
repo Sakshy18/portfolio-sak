@@ -2,6 +2,7 @@
 import { motion, useMotionValue, animate } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import GradientText from "./GradientText";
+import SuspenseImage from "./ui/SuspenseImage";
 
 const baseItems = [
   { id: 1, title: "AI Content", image: "/assets/designs/3.svg" },
@@ -96,8 +97,9 @@ export default function StayAheadCarousel() {
                 whileHover={{ scale: 1.03 }}
                 transition={{ type: "spring", stiffness: 200, damping: 20 }}
               >
-                <img
+                <SuspenseImage
                   src={item.image}
+                  alt={item.title}
                   className="absolute inset-0 w-full h-full object-cover"
                 />
 

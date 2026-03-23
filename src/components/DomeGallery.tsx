@@ -2,6 +2,7 @@
 import { useEffect, useMemo, useRef, useCallback } from 'react';
 import { useGesture } from '@use-gesture/react';
 import './DomeGallery.css';
+import SuspenseImage from './ui/SuspenseImage';
 
 type ImageItem = string | { src: string; alt?: string };
 
@@ -753,7 +754,7 @@ if (wantsResize) {
                   onClick={onTileClick}
                   onPointerUp={onTilePointerUp}
                 >
-                  <img src={it.src} draggable={false} alt={it.alt} />
+                  <SuspenseImage src={it.src} draggable={false} alt={it.alt} />
                 </div>
               </div>
             ))}

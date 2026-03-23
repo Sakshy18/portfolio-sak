@@ -9,6 +9,7 @@ import type {
   ExperienceEntry,
 } from "../data/aboutMeData";
 import SpotifyDandelion from "@/components/SpotifyDandelion";
+import SuspenseImage from "@/components/ui/SuspenseImage";
 
 // --- Shared Card Components ---
 const GlassCard = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
@@ -154,7 +155,7 @@ const HobbiesView = ({ items }: { items: GalleryItem[] }) => {
                       key={i}
                       className="aspect-square overflow-hidden rounded-2xl border border-white/5 bg-[#0d0d0d] group"
                     >
-                      <img
+                      <SuspenseImage
                         src={img}
                         alt={`create-${i}`}
                         className="w-full h-full object-cover transition duration-500 group-hover:scale-105"
@@ -175,7 +176,7 @@ const HobbiesView = ({ items }: { items: GalleryItem[] }) => {
                       key={i}
                       className="aspect-square overflow-hidden rounded-2xl border border-white/5 bg-[#0d0d0d] group"
                     >
-                      <img
+                      <SuspenseImage
                         src={img}
                         alt={`capture-${i}`}
                         className="w-full h-full object-cover transition duration-500 group-hover:scale-105"
@@ -197,7 +198,7 @@ const HobbiesView = ({ items }: { items: GalleryItem[] }) => {
                       key={i}
                       className="aspect-square overflow-hidden rounded-2xl border border-white/5 bg-[#0d0d0d] group"
                     >
-                      <img
+                      <SuspenseImage
                         src={img}
                         alt={`curate-${i}`}
                         className="w-full h-full object-cover transition duration-500 group-hover:scale-105"
@@ -280,7 +281,7 @@ const HobbiesView = ({ items }: { items: GalleryItem[] }) => {
                   onLeave={handleLeave}
                 />
               ) : (
-                <img
+                <SuspenseImage
                   src={item.imageUrl}
                   alt={item.title}
                   className="max-h-full w-auto object-contain rounded-2xl"
@@ -326,7 +327,7 @@ export default function AboutMe() {
           
           <div className="flex flex-col sm:flex-row md:flex-col items-center sm:items-center md:items-start gap-6 mb-10 md:mb-16">
             <div className="w-24 h-24 rounded-full border border-white/10 p-1 bg-white/[0.02]">
-                <img src={aboutMeData.profilePicUrl} alt={aboutMeData.name} className="w-full h-full rounded-full object-cover grayscale" />
+                <SuspenseImage src={aboutMeData.profilePicUrl} alt={aboutMeData.name} className="w-full h-full rounded-full object-cover grayscale" />
             </div>
             <div className="text-center md:text-left">
                 <p className="text-zinc-600 font-mono text-[10px] uppercase tracking-widest mb-1">{aboutMeData.title}</p>
