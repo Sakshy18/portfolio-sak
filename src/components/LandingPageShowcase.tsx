@@ -7,7 +7,7 @@ import flip5 from "/assets/flip5.svg";
 import flip6 from "/assets/flip6.svg";
 import flip7 from "/assets/flip7.svg";
 import flip8 from "/assets/flip8.svg";
-import { useEffect, useLayoutEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import GradientText from "./GradientText";
@@ -20,6 +20,7 @@ const images = [flip1, flip2, flip3, flip4, flip5, flip6, flip7, flip8];
 export default function LandingCards() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLImageElement[]>([]);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
@@ -32,8 +33,18 @@ export default function LandingCards() {
     return () => window.clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 640px)");
+
+    const updateMobile = () => setIsMobile(mediaQuery.matches);
+    updateMobile();
+
+    mediaQuery.addEventListener("change", updateMobile);
+    return () => mediaQuery.removeEventListener("change", updateMobile);
+  }, []);
+
   useLayoutEffect(() => {
-    if (!sectionRef.current) return;
+    if (!sectionRef.current || isMobile) return;
     const cards = cardsRef.current;
 
     const ctx = gsap.context(() => {
@@ -73,11 +84,11 @@ export default function LandingCards() {
       ctx.revert();
       cardsRef.current = [];
     };
-  }, []);
+  }, [isMobile]);
 
   return (
-    <section ref={sectionRef} className="clay-section">
-      <div className="clay-sticky">
+    <section ref={sectionRef} className={`clay-section ${isMobile ? "clay-section-mobile" : ""}`}>
+      <div className={`clay-sticky ${isMobile ? "clay-sticky-mobile" : ""}`}>
         <div className="flex flex-col items-center mb-16 text-center w-full">
          <GradientText
             colors={["#4f772d", "#90a955", "#ecf39e"]}
@@ -99,22 +110,36 @@ export default function LandingCards() {
           <p className="text-[1.2rem] mt-3 text-gray-400 text-center w-full">Few landing page designs</p>
         </div>
 
-        <div className="clay-stage">
-          <div className="clay-frame">
+        {isMobile ? (
+          <div className="clay-stack">
             {images.map((flip, i) => (
               <SuspenseImage
                 key={i}
                 src={flip}
-                ref={(el) => {
-                  if (el) cardsRef.current[i] = el;
-                }}
-                className="clay-card"
+                className="clay-card clay-card-static"
                 alt={`Landing design ${i + 1}`}
                 priority={i < 2}
               />
             ))}
           </div>
-        </div>
+        ) : (
+          <div className="clay-stage">
+            <div className="clay-frame">
+              {images.map((flip, i) => (
+                <SuspenseImage
+                  key={i}
+                  src={flip}
+                  ref={(el) => {
+                    if (el) cardsRef.current[i] = el;
+                  }}
+                  className="clay-card"
+                  alt={`Landing design ${i + 1}`}
+                  priority={i < 2}
+                />
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );

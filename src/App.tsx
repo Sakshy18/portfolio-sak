@@ -11,7 +11,6 @@ import SplashCursor from "./components/SplashCursor";
 import ProjectDetail from "./pages/ProjectDetail";
 import { Analytics } from "@vercel/analytics/react"
 import LandingPageShowcase from "./components/LandingPageShowcase";
-
 import { useState } from "react";
 import AboutMe from "./pages/AboutMe";
 import Loader from "./components/Loader";
