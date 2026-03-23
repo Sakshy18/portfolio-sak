@@ -1,4 +1,12 @@
-const NavigationGrid = ({ activeSection, onTileClick }) => {
+interface NavigationGridProps {
+  activeSection: string;
+  onTileClick: (sectionId: string) => void;
+}
+
+export default function NavigationGrid({
+  activeSection,
+  onTileClick,
+}: NavigationGridProps) {
   const sections = [
     { id: '01', label: 'Overview' },
     { id: '02', label: 'Research' },
@@ -26,4 +34,4 @@ const NavigationGrid = ({ activeSection, onTileClick }) => {
       ))}
     </div>
   );
-};
+}

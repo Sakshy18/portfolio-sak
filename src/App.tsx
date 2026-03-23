@@ -5,12 +5,11 @@ import Navbar from "./components/Navbar";
 import ShowcaseSection from "./components/ShowcaseSection";
 
 import { Routes, Route } from "react-router-dom";
-import LandingPageShowcase from "./components/LandingPageShowcase";
 import StayAheadCarousel from "./components/StayAheadCarousel";
 import Designs from "./pages/Designs";
 import SplashCursor from "./components/SplashCursor";
 import ProjectDetail from "./pages/ProjectDetail";
-import AboutMe from "./pages/Aboutme";
+import AboutMe from "./pages/AboutMe";
 
 function App() {
   return (

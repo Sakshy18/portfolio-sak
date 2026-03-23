@@ -1,11 +1,11 @@
-import { useState, useCallback, useEffect, useRef, ReactNode } from 'react';
+import { useState, useCallback, useEffect, useRef, type CSSProperties, type ReactNode } from 'react';
 import { motion, useMotionValue, useAnimationFrame, useTransform } from 'motion/react';
 import './GradientText.css';
 
 interface GradientTextProps {
   children: ReactNode;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
   colors?: string[];
   animationSpeed?: number;
   showBorder?: boolean;

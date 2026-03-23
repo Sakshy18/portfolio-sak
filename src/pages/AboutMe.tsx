@@ -2,7 +2,12 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { ChevronLeft } from "lucide-react";
 import { aboutMeData } from "../data/aboutMeData";
-import type { AboutSection, GalleryItem, SkillGroup, EducationEntry, ExperienceEntry } from "../data/aboutMeData";
+import type {
+  GalleryItem,
+  SkillGroup,
+  EducationEntry,
+  ExperienceEntry,
+} from "../data/aboutMeData";
 
 // --- Shared Card Components ---
 const GlassCard = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
@@ -193,7 +198,14 @@ export default function AboutMe() {
       {/* CONTENT (70%) */}
       <section className="w-[70%] h-full overflow-y-auto scroll-smooth custom-scrollbar bg-[#0a0a0a]">
         {aboutMeData.sections.map((section) => (
-          <div key={section.id} id={section.id} ref={(el) => (sectionRefs.current[section.id] = el)} className="min-h-screen p-16 md:p-32 flex flex-col justify-start border-b border-white/5">
+          <div
+            key={section.id}
+            id={section.id}
+            ref={(el) => {
+              sectionRefs.current[section.id] = el;
+            }}
+            className="min-h-screen p-16 md:p-32 flex flex-col justify-start border-b border-white/5"
+          >
             <div className="max-w-3xl mb-24">
               <div className="flex items-center gap-4 mb-8 opacity-20">
                   <span className="text-xs font-mono tracking-widest">{section.id}</span>

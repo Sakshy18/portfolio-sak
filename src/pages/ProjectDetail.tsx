@@ -171,7 +171,9 @@ export default function ProjectDetail() {
           <div
             key={section.id}
             id={section.id}
-            ref={(el) => (sectionRefs.current[section.id] = el)}
+            ref={(el) => {
+              sectionRefs.current[section.id] = el;
+            }}
             className="h-auto min-h-[50vh] p-16 md:p-24 flex flex-col justify-start border-b border-white/5"
           >
             {/* Section Heading & Description */}
