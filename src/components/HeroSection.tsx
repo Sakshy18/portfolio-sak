@@ -48,30 +48,38 @@ export default function HeroSection() {
       {/* Updated CTA buttons with animations */}
       <div className="flex gap-4 mt-8">
         {/* Resume Button - Pastel Green */}
-       <button className="group relative px-8 py-3 rounded-full font-medium transition-all duration-500 overflow-hidden bg-[#ecf39e] text-black hover:scale-105">
-  {/* Original text that slides up and fades out */}
-  <span className="block transition-all duration-200 group-hover:-translate-y-full group-hover:opacity-0">
-    Resume
-  </span>
-  
-  {/* New text that slides up from below */}
-  <span className="absolute inset-0 flex items-center justify-center transition-all duration-500 translate-y-full group-hover:translate-y-0">
-    Download
-  </span>
-</button>
+        <a
+          href="https://drive.google.com/file/d/1vsPZ8sayrkgJJkwbO3CSfUnxWd_hBeEH/view?usp=sharing"
+          target="_blank"
+          rel="noreferrer"
+          className="group relative px-8 py-3 rounded-full font-medium transition-all duration-500 overflow-hidden bg-[#ecf39e] text-black hover:scale-105"
+        >
+          {/* Original text that slides up and fades out */}
+          <span className="block transition-all duration-200 group-hover:-translate-y-full group-hover:opacity-0">
+            Resume
+          </span>
+
+          {/* New text that slides up from below */}
+          <span className="absolute inset-0 flex items-center justify-center transition-all duration-500 translate-y-full group-hover:translate-y-0">
+            Download
+          </span>
+        </a>
 
         {/* Contact Button - Glassy */}
-       <button className="group relative px-8 py-3 rounded-full font-medium transition-all duration-500 overflow-hidden backdrop-blur-md bg-white/10 border border-white/20 text-white hover:bg-white/20 hover:scale-105">
-  {/* Original text that slides up and fades out */}
-  <span className="block transition-all duration-200 group-hover:-translate-y-full group-hover:opacity-0">
-    Contact
-  </span>
-  
-  {/* New text that slides up from below */}
-  <span className="absolute inset-0 flex items-center justify-center transition-all duration-500 translate-y-full group-hover:translate-y-0">
-    Let's Talk
-  </span>
-</button>
+        <a
+          href="mailto:sakshi.thombre182@gmail.com"
+          className="group relative px-8 py-3 rounded-full font-medium transition-all duration-500 overflow-hidden backdrop-blur-md bg-white/10 border border-white/20 text-white hover:bg-white/20 hover:scale-105"
+        >
+          {/* Original text that slides up and fades out */}
+          <span className="block transition-all duration-200 group-hover:-translate-y-full group-hover:opacity-0">
+            Contact
+          </span>
+
+          {/* New text that slides up from below */}
+          <span className="absolute inset-0 flex items-center justify-center transition-all duration-500 translate-y-full group-hover:translate-y-0">
+            Let&apos;s Talk
+          </span>
+        </a>
 
       </div>
     </section>

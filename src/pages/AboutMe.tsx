@@ -8,6 +8,7 @@ import type {
   EducationEntry,
   ExperienceEntry,
 } from "../data/aboutMeData";
+import SpotifyDandelion from "@/components/SpotifyDandelion";
 
 // --- Shared Card Components ---
 const GlassCard = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
@@ -63,7 +64,7 @@ const ExperienceView = ({ entries }: { entries: ExperienceEntry[] }) => (
 
 // --- Section 02: Education Component ---
 const EducationView = ({ entries }: { entries: EducationEntry[] }) => (
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20 max-w-5xl">
+  <div className="grid grid-cols-1 gap-8 mb-20 w-full">
     {entries.map((entry, idx) => (
       <GlassCard key={idx} className="flex flex-col justify-between">
         <div>
@@ -102,33 +103,196 @@ const SkillsView = ({ groups }: { groups: SkillGroup[] }) => (
 );
 
 // --- Section 04: Hobbies Component ---
-const HobbiesView = ({ items }: { items: GalleryItem[] }) => (
-  <div className="flex flex-col gap-48">
-    {items.map((item, idx) => (
-      <div key={idx} className={`flex flex-col xl:flex-row gap-20 items-center ${idx % 2 !== 0 ? 'xl:flex-row-reverse' : ''}`}>
-        <div className="w-full xl:w-[35%]">
-          <h4 className="text-2xl font-bold mb-2">{item.title}</h4>
-          <p className="text-zinc-500 text-xs uppercase tracking-widest mb-6">{item.subtitle}</p>
-          <p className="text-zinc-400 text-base leading-relaxed mb-10">{item.description}</p>
-          {item.decisions && (
-            <div className="space-y-4">
-              <p className="text-[10px] uppercase tracking-[0.2em] text-zinc-600 font-black">Medium Details</p>
-              {item.decisions.map((d, i) => (
-                <div key={i} className="flex gap-3 items-start border-l border-white/10 pl-4 py-1">
-                  <p className="text-[14px] text-zinc-300 font-light leading-snug">{d}</p>
+type SpotifyNode = {
+  artist: string;
+  genre: string;
+  value: number;
+};
+
+const HobbiesView = ({ items }: { items: GalleryItem[] }) => {
+  const [activeNode, setActiveNode] = useState<SpotifyNode | null>(null);
+  const [timeoutRef, setTimeoutRef] = useState<ReturnType<typeof setTimeout> | null>(null);
+
+  const handleHover = (node: SpotifyNode | null) => {
+    if (timeoutRef) clearTimeout(timeoutRef);
+    setActiveNode(node);
+  };
+
+  const handleLeave = () => {
+    const timeout = setTimeout(() => {
+      setActiveNode(null);
+    }, 200);
+    setTimeoutRef(timeout);
+  };
+
+  return (
+    <div className="flex flex-col gap-48">
+      {items.map((item, idx) => {
+
+        // ✅ SIMPLE GRID SECTION
+        if (item.type === "grid" && item.images && !Array.isArray(item.images)) {
+          const gridImages = item.images;
+
+          return (
+            <div key={idx} className="w-full">
+              
+              {/* MAIN TITLE */}
+              <div className="mb-16">
+                <h4 className="text-3xl font-bold">{item.title}</h4>
+              </div>
+            
+
+              {/* CREATE */}
+              <div>
+                <p className="text-xs uppercase tracking-widest text-zinc-500 mb-6">
+                  Create
+                </p>
+
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+                  {gridImages.create.map((img, i) => (
+                    <div
+                      key={i}
+                      className="aspect-square overflow-hidden rounded-2xl border border-white/5 bg-[#0d0d0d] group"
+                    >
+                      <img
+                        src={img}
+                        alt={`create-${i}`}
+                        className="w-full h-full object-cover transition duration-500 group-hover:scale-105"
+                      />
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
+
+                 <div className="mb-20 mt-20">
+                <p className="text-xs uppercase tracking-widest text-zinc-500 mb-6">
+                  Capture
+                </p>
+
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+                  {gridImages.capture.map((img, i) => (
+                    <div
+                      key={i}
+                      className="aspect-square overflow-hidden rounded-2xl border border-white/5 bg-[#0d0d0d] group"
+                    >
+                      <img
+                        src={img}
+                        alt={`capture-${i}`}
+                        className="w-full h-full object-cover transition duration-500 group-hover:scale-105"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+
+                <div className="mb-20">
+                <p className="text-xs uppercase tracking-widest text-zinc-500 mb-6">
+                  Curate Experiences
+                </p>
+
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+                  {gridImages.curate.map((img, i) => (
+                    <div
+                      key={i}
+                      className="aspect-square overflow-hidden rounded-2xl border border-white/5 bg-[#0d0d0d] group"
+                    >
+                      <img
+                        src={img}
+                        alt={`curate-${i}`}
+                        className="w-full h-full object-cover transition duration-500 group-hover:scale-105"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
-          )}
-        </div>
-        <div className="w-full xl:w-[65%] aspect-square bg-[#0d0d0d] border border-white/5 rounded-[3rem] flex items-center justify-center p-12 relative overflow-hidden shadow-2xl transition hover:border-white/10 hover:scale-[1.01]">
-          <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] to-transparent pointer-events-none" />
-          <img src={item.imageUrl} alt={item.title} className="max-h-full w-auto object-contain rounded-2xl shadow-[0_40px_100px_rgba(0,0,0,0.9)]" />
-        </div>
-      </div>
-    ))}
-  </div>
-);
+          );
+        }
+
+        // ✅ EXISTING (UNCHANGED)
+        return (
+          <div
+            key={idx}
+            className={`flex flex-col xl:flex-row gap-20 items-center ${
+              idx % 2 !== 0 ? "xl:flex-row-reverse" : ""
+            }`}
+          >
+            {/* LEFT PANEL */}
+            <div className="w-full xl:w-[35%] transition-all duration-300 ease-out">
+              <h4 className="text-2xl font-bold mb-2">
+                {item.type === "spotify"
+                  ? activeNode?.artist || item.title
+                  : item.title}
+              </h4>
+
+              <p className="text-zinc-500 text-xs uppercase tracking-widest mb-6">
+                {item.type === "spotify"
+                  ? activeNode?.genre || item.subtitle
+                  : item.subtitle}
+              </p>
+
+              <p className="text-zinc-400 text-base leading-relaxed mb-10">
+                {item.type === "spotify"
+                  ? activeNode
+                    ? `You’ve spent ~${activeNode.value} hours listening to ${activeNode.artist}.`
+                    : item.description
+                  : item.description}
+              </p>
+
+              {item.decisions && (
+                <div className="space-y-4">
+                  <p className="text-[10px] uppercase tracking-[0.2em] text-zinc-600 font-black">
+                    Medium Details
+                  </p>
+
+                  {item.type === "spotify" && activeNode ? (
+                    <>
+                      <div className="border-l border-white/10 pl-4">
+                        <p className="text-zinc-300">
+                          Genre → {activeNode.genre}
+                        </p>
+                      </div>
+                      <div className="border-l border-white/10 pl-4">
+                        <p className="text-zinc-300">
+                          Listening → {activeNode.value} hrs
+                        </p>
+                      </div>
+                    </>
+                  ) : (
+                    item.decisions.map((d, i) => (
+                      <div key={i} className="border-l border-white/10 pl-4">
+                        <p className="text-zinc-300">{d}</p>
+                      </div>
+                    ))
+                  )}
+                </div>
+              )}
+            </div>
+
+            {/* RIGHT PANEL */}
+            <div className="w-full xl:w-[65%] aspect-square bg-[#0d0d0d] border border-white/5 rounded-[3rem] flex items-center justify-center p-0 xl:p-6 relative overflow-hidden shadow-2xl">
+              <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] to-transparent pointer-events-none" />
+
+              {item.type === "spotify" ? (
+                <SpotifyDandelion
+                  onHover={handleHover}
+                  onLeave={handleLeave}
+                />
+              ) : (
+                <img
+                  src={item.imageUrl}
+                  alt={item.title}
+                  className="max-h-full w-auto object-contain rounded-2xl"
+                />
+              )}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
 
 // --- Main About Page Component ---
 export default function AboutMe() {
@@ -178,7 +342,7 @@ export default function AboutMe() {
             {activeSection}
           </span>
           <div className="relative z-10 mb-8">
-            <p className="text-zinc-600 font-mono text-[9px] uppercase tracking-[0.3em] mb-2">About Me // Sumairha</p>
+            <p className="text-zinc-600 font-mono text-[9px] uppercase tracking-[0.3em] mb-2">About Me // Sakshi</p>
             <h2 className="text-5xl font-bold tracking-tighter">
                 {aboutMeData.sections.find(s => s.id === activeSection)?.label}
             </h2>

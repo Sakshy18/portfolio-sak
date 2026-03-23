@@ -1,9 +1,16 @@
+
 export interface GalleryItem {
   title: string;
   subtitle: string;
   description: string;
   decisions: string[];
-  imageUrl: string;
+  imageUrl?: string;
+ type?: "image" | "spotify" | "grid";
+images?: string[] | {
+  capture: string[];
+  create: string[];
+  curate: string[];
+};
 }
 
 export interface SkillGroup {
@@ -54,41 +61,78 @@ export interface AboutProfile {
 }
 
 export const aboutMeData: AboutProfile = {
-  name: "Sumairha Mumtaz",
-  title: "Experience Designer",
-  profilePicUrl: "/path/to/profile-pic.png", // <--- UPDATE THIS PATH
-  summary: "Design strategist with five years of experience advocating for user needs.",
+  name: "Sakshi Thombre",
+  title: "Product Engineer (Design + Development)",
+  profilePicUrl: "/assets/sakshi.jpeg",
+  summary:
+    "I design, build, and sometimes obsess over digital products. From sketching ideas to shipping interfaces, I enjoy working at the intersection of design and code, making things that not only work well, but feel right. I’m especially drawn to crafting clean systems, exploring user behavior, and bringing ideas to life end-to-end.",
   sections: [
     {
       id: "01",
       label: "Experience",
-      title: "Design & Consulting Journey",
-      description: "My career has been defined by bridging the gap between business goals and human-centered needs, working across sectors including education, healthcare, banking, and fintech.",
+      title: "Product, Design & Engineering Journey",
+      description:
+        "My work sits at the intersection of product thinking, design systems, and frontend engineering. Building scalable, user-centered digital products from 0→1 and beyond.",
       experience: [
         {
-          company: "CGI Inc",
-          location: "Pittsburgh ➔ San Francisco (hybrid)",
-          summary: "One of the world's largest IT and business consulting firms. I was a part of the company's in-house Human Centered Design practice.",
+          company: "Buddy",
+          location: "India",
+          summary:
+            "Early-stage product where I am working as a founding member shaping the product, brand, and user experience from scratch.",
           roles: [
             {
-              title: "Design Strategist",
-              duration: "Feb 2023 - Dec 2025",
+              title: "Founding Member",
+              duration: "Aug 2025 – current",
               type: "Full-time",
-              description: "Working on design and business consulting roles for clients and internal teams. Projects spanned education, healthcare, banking, and fintech — varying widely in sector, scale, and complexity."
-            },
-            {
-              title: "Business Strategist & Product Designer",
-              duration: "Jun 2022 - Aug 2022",
-              type: "Internship",
-              description: "Early exposure to enterprise-scale design consulting. Supported research, synthesis, and design work across client engagements."
+              description:
+                "Designed the entire brand identity from scratch and played a key role in defining the product vision. Collaborated closely on product strategy, feature discussions, and UX decisions. Designed and developed the landing page for Buddy. Contributed to end-to-end product design by translating brand guidelines and UX flows into scalable UI systems and consistent user experiences."
             }
           ]
         },
         {
-          company: "Investigating Design",
+          company: "Griffy",
+          location: "Pune",
+          summary:
+            "Web3-based opinion trading platform focused on high-performance interfaces and real-time systems.",
+          roles: [
+            {
+              title: "Software Development Engineer",
+              duration: "June 2024 – June 2025",
+              type: "Full-time",
+              description:
+                "Led frontend development and design for core product surfaces including the main web app and Telegram mini app. Built 25+ high-performance pages using ReactJS and TypeScript. Designed and developed the main trading interface and user experience. Engineered a real-time Telegram mini app with optimized state management, reducing API calls by 40%. Built an admin dashboard for automation workflows, reducing manual effort by 50%. Focused on scalable UI architecture, performance, and seamless user experience for 15,000+ monthly users."
+            }
+          ]
+        },
+        {
+          company: "StepOut",
+          location: "Remote",
+          summary:
+            "StepOut enhances player & team performance through in-depth football data & video analysis using AI & ML.",
+          roles: [
+            {
+              title: "Design Intern",
+              duration: "Oct 2023 – Jan 2024",
+              type: "Internship",
+              description:
+                "Worked on designing and improving multiple analytical dashboards and user-facing features. Revamped playlist and player experiences to enhance engagement. Focused on UI improvements, performance optimization, and usability. Conducted testing and debugging using modern tools. Contributed to notification systems and automation workflows improving efficiency and engagement metrics."
+            }
+          ]
+        },
+        {
+          company: "Social Spex",
           location: "India",
-          summary: "A research practice exploring the role of design in society.",
-          roles: []
+          summary:
+            "Marketing agency working across diverse industries.",
+          roles: [
+            {
+              title: "Design Intern",
+              duration: "",
+              type: "Internship",
+              description:
+                "Designed graphics and visual assets across multiple domains including education, travel, beauty, and life coaching. Worked on brand communication, social media creatives, and visual storytelling tailored to different audiences."
+            }
+          ]
         }
       ]
     },
@@ -96,23 +140,16 @@ export const aboutMeData: AboutProfile = {
       id: "02",
       label: "Education",
       title: "Academic Foundation",
-      description: "My education provided the theoretical and critical thinking framework essential for tackling complex design challenges.",
+      description:
+        "Strong academic background in computer science with a focus on building scalable systems and problem-solving.",
       education: [
         {
-          institution: "Carnegie Mellon University",
-          location: "Pittsburgh, PA",
-          degree: "Business Core",
-          duration: "",
-          type: "Curriculum",
+          institution: "Savitribai Phule Pune University",
+          location: "Pune",
+          degree: "Bachelor of Engineering in Computer Science (CGPA: 9.48)",
+          duration: "Aug 2020 – May 2024",
+          type: "Full-time",
           description: ""
-        },
-        {
-          institution: "Graduate Teaching Assistant",
-          location: "",
-          degree: "Business Core (III 49743)",
-          duration: "Aug 2022 - Dec 2022",
-          type: "Part-time",
-          description: "Teaching Assistant under Prof. David Lamont. Supported facilitation and communication for a graduate-level business course."
         }
       ]
     },
@@ -120,23 +157,81 @@ export const aboutMeData: AboutProfile = {
       id: "03",
       label: "Skills",
       title: "Toolkit & Practices",
-      description: "My expertise spans user research, interactive prototyping, workshop facilitation, and the integration of emerging AI tools into the design workflow.",
+      description:
+        "A hybrid skillset combining product thinking, design systems, and modern frontend engineering.",
       skills: [
         {
-          category: "Practice",
-          tags: ["Workshop Facilitation", "Experience Design", "Service Design", "UI Design", "Business Strategy"]
+          category: "Tools",
+          tags: [
+            "Figma",
+            "Mural",
+            "FigJam",
+            "Webflow",
+            "Spline",
+            "Adobe Illustrator",
+            "Adobe InDesign",
+            "Procreate",
+            "Framer",
+            "Vercel",
+            "GitHub"
+          ]
         },
         {
           category: "Research",
-          tags: ["User Interviews", "Blueprinting", "Journey Mapping", "Co-design", "Usability Testing"]
+          tags: [
+            "User Interviews",
+            "Blueprinting",
+            "Journey Mapping",
+            "Co-design",
+            "Usability Testing",
+            "Research Synthesis"
+          ]
+        },
+      
+        {
+          category: "Frontend",
+          tags: [
+            "React",
+            "Next.js",
+            "React Native",
+            "TypeScript",
+            "JavaScript",
+            "HTML",
+            "CSS",
+            "Tailwind CSS"
+          ]
+        },
+          {
+          category: "Practice",
+          tags: [
+            "Workshop Facilitation",
+            "Experience Design",
+            "Service Design",
+            "UI Design",
+            "Business Strategy",
+            "Product Thinking",
+            "Design Systems",
+            "Stakeholder Collaboration",
+            "Market Research",
+            "Requirement Analysis"
+          ]
         },
         {
-          category: "Tools",
-          tags: ["Figma", "Mural", "FigJam", "Webflow", "Spline", "Adobe Illustrator", "Adobe InDesign", "Procreate"]
+          category: "Programming",
+          tags: [
+            "Python",
+            "SQL",
+            "Flutter"
+          ]
         },
         {
           category: "AI",
-          tags: ["Vibe-coding", "Research Synthesis", "Generative Ideation", "Claude", "Replit"]
+          tags: [
+            "Vibe-coding",
+            "Generative Ideation",
+            "Claude",
+            "Replit"
+          ]
         }
       ]
     },
@@ -144,22 +239,51 @@ export const aboutMeData: AboutProfile = {
       id: "04",
       label: "Hobbies",
       title: "Off-Hours Creative Focus",
-      description: "My interests outside of work keep me creative and provide fresh perspectives for my design thinking.",
+      description:
+        "Creative exploration beyond product work.",
       hobbiesGallery: [
         {
-          title: "Photography I",
-          subtitle: "Street & Architecture",
-          description: "A placeholder for photography descriptions. For example, capturing the contrast between old and new in dynamic urban environments.",
-          decisions: ["Shot on Fujifilm X-T4", "35mm Prime Lens", "Monochrome Edit"],
-          imageUrl: "/path/to/your/photo-1.jpg" // <--- UPDATE THIS PATH
-        },
-        {
-          title: "Generative Art",
-          subtitle: "Code-Based Creative Outlets",
-          description: "Exploring the intersection of geometry and chance using tools like Replit or Claude for visualization.",
-          decisions: ["Canvas API", "Randomized parameters", "Pastel Palette"],
-          imageUrl: "/path/to/your/gen-art.png" // <--- UPDATE THIS PATH
-        }
+  title: "Spotify Dandelion",
+  subtitle: "Music Taste Visualization",
+  description: "A visual representation of my listening habits across genres and artists.",
+  decisions: [
+    "Node size → listening frequency",
+    "Color → genre",
+    "Hover on nodes to see artist and genre details"
+  ],
+  type: "spotify"
+},
+        
+{
+ title: "What I like doing",
+  subtitle: "",
+  description: "",
+  decisions: [],
+  type: "grid",
+  images: {
+    capture: [
+      "/assets/paintings/capture1.svg",
+      "/assets/paintings/capture2.svg",
+      "/assets/paintings/capture3.svg",
+      "/assets/paintings/capture4.svg",
+      "/assets/paintings/capture5.svg",
+    ],
+    create: [
+      "/assets/paintings/create1.svg",
+      "/assets/paintings/create2.svg",
+      "/assets/paintings/create3.svg",
+      "/assets/paintings/create4.svg",
+      "/assets/paintings/create5.svg",
+      "/assets/paintings/create6.svg"
+    ],
+    curate: [
+      "/assets/paintings/curate1.svg",
+      "/assets/paintings/curate2.svg",
+      "/assets/paintings/curate3.svg",
+    ]
+  }
+},
+
       ]
     }
   ]

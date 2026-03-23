@@ -7,9 +7,10 @@ import flip5 from "/assets/flip5.svg";
 import flip6 from "/assets/flip6.svg";
 import flip7 from "/assets/flip7.svg";
 import flip8 from "/assets/flip8.svg";
-import { useEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import GradientText from "./GradientText";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -19,42 +20,46 @@ export default function LandingCards() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLImageElement[]>([]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+    if (!sectionRef.current) return;
     const cards = cardsRef.current;
 
-    gsap.set(cards, {
-      transformOrigin: "left center",
-      transformStyle: "preserve-3d",
-    });
+    const ctx = gsap.context(() => {
+      gsap.set(cards, {
+        transformOrigin: "left center",
+        transformStyle: "preserve-3d",
+      });
 
-    const trigger = ScrollTrigger.create({
-      trigger: sectionRef.current,
-      start: "top top",
-      end: () => "+=" + window.innerHeight * (images.length + 0.5),
-      scrub: true,
-      pin: true,
-      onUpdate: (self) => {
-        const progress = self.progress * images.length;
+      ScrollTrigger.create({
+        trigger: sectionRef.current,
+        start: "top top",
+        end: () => "+=" + window.innerHeight * (images.length + 0.5),
+        scrub: true,
+        pin: true,
+        onUpdate: (self) => {
+          const progress = self.progress * images.length;
 
-        cards.forEach((card, i) => {
-          const p = progress - i;
-          const rotation = Math.min(
-            Math.max(p * 120, 0),
-            i === images.length - 1 ? 0 : 120
-          );
+          cards.forEach((card, i) => {
+            const p = progress - i;
+            const rotation = Math.min(
+              Math.max(p * 120, 0),
+              i === images.length - 1 ? 0 : 120
+            );
 
-          gsap.set(card, {
-            rotateY: rotation,
-            zIndex: images.length - i,
+            gsap.set(card, {
+              rotateY: rotation,
+              zIndex: images.length - i,
+            });
           });
-        });
-      },
-    });
+        },
+      });
 
-    ScrollTrigger.refresh();
+      ScrollTrigger.refresh();
+    });
 
     return () => {
-      trigger.kill();
+      ctx.revert();
+      cardsRef.current = [];
     };
   }, []);
 
@@ -62,17 +67,22 @@ export default function LandingCards() {
     <section ref={sectionRef} className="clay-section">
       <div className="clay-sticky">
         <div className="flex flex-col items-center mb-16">
-          <div
-            className="text-6xl bg-clip-text text-transparent"
-            style={{
-              fontFamily: "'Georgia', serif",
-              fontWeight: 500,
-              backgroundImage: `linear-gradient(45deg, var(--color-gradient-from), var(--color-gradient-via), var(--color-gradient-to))`,
+         <GradientText
+            colors={["#4f772d", "#90a955", "#ecf39e"]}
+            animationSpeed={11.5}
+            showBorder={false}
+            // Keep the className for any tailwind/global spacing if needed
+            className="font-bold" 
+            // Add the style prop here
+            style={{ 
+             fontSize:'3.9rem',
+              fontFamily: "'Georgia', serif", 
+              fontWeight: 200 
             }}
           >
-            <h2>Landing Page Designs</h2>
-          </div>
-          <p className="text-2xl mt-1.5 text-gray-400 ">Few landing page designs</p>
+         Landing Page Designs
+          </GradientText>
+          <p className="text-[1.2rem]  mt-3 text-gray-400 ">Few landing page designs</p>
         </div>
 
         <div className="clay-stage">
