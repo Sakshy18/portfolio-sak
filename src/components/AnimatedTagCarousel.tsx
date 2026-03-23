@@ -6,7 +6,9 @@ const tags = [
   "UX & UI design",
   "Graphics",
   "SaaS",
-  "No-Code",
+  "Application Design",
+  "Web Development",
+  "Framer",
   "Animation",
 ];
 

@@ -36,6 +36,7 @@ export interface Project {
   title: string;
   subtitle: string;
   image: string;
+  heroImage?: string; // New field for the hero image
   videoHero?: string; // New field for the .mov file
   role?: string; // "Designer & Developer"
   tools?: string[];
@@ -442,69 +443,314 @@ export const projectsData: Project[] = [
   {
     slug: "stepout",
     title: "Stepout",
-    subtitle: "A football analysis platform for players and coaches",
+    subtitle: "AI-Powered Football Talent Identification & Analytics",
+    role: "Lead Product Designer",
+    tools: [
+      "Figma",
+      "Maze",
+      "Similarweb",
+      "Competitor Analysis",
+      "User Research",
+      "Market Strategy",
+    ],
     image: "/projects/stepout.webp",
     sections: [
       {
         id: "01",
         label: "Overview",
-        title: "Project Overview",
-        description: "Performance tracking and analysis for athletes.",
+        title: "The Professional Scouting Gap",
+        description:
+          "Stepout is an AI-driven platform that bridges the gap between raw talent and professional scouting. I designed the core application interface and complex data visualization systems, focusing on turning granular match data into actionable coaching insights for academies and professional clubs.",
+        metrics: [
+          { label: "User Growth", value: "+40%" },
+          { label: "Subscription Lift", value: "25%" },
+          { label: "Data Points", value: "10k+" },
+        ],
       },
-      { id: "02", label: "Research", title: "Coach & Scout Feedback" },
-      { id: "03", label: "Journey", title: "Feature Roadmap" },
-      { id: "04", label: "Decisions", title: "Performance Metrics" },
       {
-        id: "05",
-        label: "Designs",
-        title: "Visual Language",
-        gallery: [
+        id: "02",
+        label: "Target",
+        title: "Who I Designed For",
+        description:
+          "The platform serves a dual-purpose ecosystem: helping scouts find needles in haystacks and helping coaches refine their current roster.",
+        insights: [
           {
-            title: "Player Analytics",
-            subtitle: "Heatmaps & Stats",
-            description:
-              "Visualizing on-field movement and technical performance data.",
-            decisions: ["Heatmap color-coding", "Stat comparison"],
-            imageUrl: "/projects/stepout-stats.png",
+            quote:
+              "I need to quickly see which players are consistently outperforming their position average without watching hours of tape.",
+            role: "The Talent Scout",
+            takeaway:
+              "Goal: High-level comparative matrices to filter thousands of players instantly.",
+          },
+          {
+            quote:
+              "Preparing for the next match requires me to visualize my lineup and review specific play-types from previous games.",
+            role: "The Head Coach",
+            takeaway:
+              "Goal: Tactical tools like Lineup Builders and Video Playlists for daily training.",
           },
         ],
       },
-      { id: "06", label: "Outcome", title: "Athlete Growth" },
-      { id: "07", label: "Reflection", title: "Future Scope" },
+      {
+        id: "03",
+        label: "Market",
+        title: "Competitor Analysis & Strategy",
+        description:
+          "While giants like Wyscout and Hudl dominate the elite professional market, they are often too expensive or complex for mid-tier academies. Our strategy was to provide 'Elite Analytics with Local Intuition'.",
+        decisions: [
+          "Competitor Gap: Most platforms provide data but lack 'Tactical Context'.",
+          "Strategic Pivot: Integrated video analysis directly into data figures (Playlist feature).",
+          "Pricing Edge: Positioned features like the 'Sense Matrix' as high-value modules for paid subscribers.",
+        ],
+      },
+      {
+        id: "04",
+        label: "Designs",
+        title: "Core Feature Innovation",
+        description:
+          "I introduced three primary features that drove investor interest and significantly increased the platform's paid user base.",
+        gallery: [
+          {
+            title: "Player Lineup Builder",
+            subtitle: "Tactical Planning Tool",
+            description:
+              "One of the most requested features. It allows coaches to build formations and study player synergy for upcoming matches based on performance history.",
+            imageUrl: "/projects/stepout/player-lineup.svg",
+            decisions: [
+              "Drag-and-drop formation logic",
+              "Real-time fitness and form overlays",
+              "Comparative bench-strength analysis",
+            ],
+          },
+          {
+            title: "Custom Playlists",
+            subtitle: "Video Filtering Engine",
+            description:
+              "A major conversion driver for paid subscriptions. Coaches can filter match footage by 'Sense' or 'Action' to create review reels.",
+            imageUrl: "/projects/stepout/playlist-default.svg",
+            decisions: [
+              "Angle-based camera switching",
+              "Tag-based automatic clip generation",
+              "Investor-requested 'Share with Player' flow",
+            ],
+          },
+          {
+            title: "The Sense Matrix",
+            subtitle: "Proprietary Data Model",
+            description:
+              "A unique visualization that correlates cognitive player data with technical output, providing a 'Sense' score for player intelligence.",
+            imageUrl: "/projects/stepout/sense-matrix.svg",
+            decisions: [
+              "Visualizing intangible traits (Vision, Timing)",
+              "Normalized scoring against league averages",
+              "Mobile-responsive data density",
+            ],
+          },
+        ],
+      },
+      {
+        id: "05",
+        label: "Identity",
+        title: "Visual Language & Performance",
+        gallery: [
+          {
+            title: "Data Visualization System",
+            subtitle: "Accuracy & Activity Maps",
+            description:
+              "A custom set of charts designed to maintain readability in dark environments (sidelines/locker rooms).",
+            imageUrl: "/projects/stepout/data-points.svg",
+            decisions: [
+              "High-contrast color scales",
+              "Locker-room accessibility testing",
+            ],
+          },
+          {
+            title: "Spotlight Focus",
+            subtitle: "Player Highlighting",
+            description:
+              "Visual cues used within the video player to track specific athletes during motion analysis.",
+            imageUrl: "/projects/stepout/spotlight.svg",
+            decisions: [
+              "Dynamic player tracking UI",
+              "Non-obstructive labeling",
+            ],
+          },
+        ],
+      },
+      {
+        id: "06",
+        label: "Outcome",
+        title: "Impact & Growth",
+        description:
+          "The introduction of tactical tools (Lineup and Playlists) shifted the perception of Stepout from a simple 'database' to a 'daily essential'.",
+        decisions: [
+          "Successfully secured second-round funding based on the 'Lineup Builder' roadmap.",
+          "Increased weekly active users (WAU) by 40% within three months.",
+          "Created a visual standard for AI-integrated scouting reports.",
+        ],
+      },
     ],
   },
   {
     slug: "tyntan",
     title: "TynTan",
-    subtitle: "Buy and sell tokens with a swipe",
+    subtitle: "Gamified Telegram Trading Bot: Swipe to Trade",
+    role: "Lead Designer & Frontend Developer",
+    tools: [
+      "React Native",
+      "Telegram Mini Apps API",
+      "Figma",
+      "Competitor Analysis",
+      "Responsive Design",
+    ],
     image: "/projects/tyntan.webp",
+    heroImage: "/projects/tyntan/logo-2.svg",
     sections: [
       {
         id: "01",
         label: "Overview",
-        title: "Project Overview",
-        description: "Gamified crypto trading platform.",
+        title: "Trading at the Speed of a Swipe",
+        description:
+          "TynTan is a high-performance Telegram Web Bot designed to strip away the complexity of traditional crypto exchanges. I built a gamified interface that allows users to trade 30+ Binance-listed tokens and engage in opinion trading across 8+ categories through a simple swipe gesture.",
+        metrics: [
+          { label: "Beta Users", value: "500+" },
+          { label: "Day 1 Launch", value: "100%" },
+          { label: "Categories", value: "8+" },
+        ],
       },
-      { id: "02", label: "Research", title: "Trading Psychology" },
-      { id: "03", label: "Journey", title: "Interactive Prototype" },
-      { id: "04", label: "Decisions", title: "The Swipe Mechanic" },
       {
-        id: "05",
-        label: "Designs",
-        title: "Visual Language",
-        gallery: [
+        id: "02",
+        label: "Market",
+        title: "The Polymarket Alternative",
+        description:
+          "While Polymarket dominates the web-based prediction market, TynTan targets the mobile-first Telegram ecosystem. We identified that 'Fast-Paced' and 'Fun' were missing from the current boring FinTech UI landscape.",
+        insights: [
           {
-            title: "Swipe Interface",
-            subtitle: "Trading Gamification",
-            description:
-              "Reducing barriers for new investors through intuitive swiping.",
-            decisions: ["Haptic feedback", "Simplified candle charts"],
-            imageUrl: "/projects/tyntan-swipe.png",
+            quote:
+              "Most trading apps feel like a spreadsheet. I want something that feels like a game but handles real value.",
+            role: "Modern Retail Trader",
+            takeaway:
+              "Leverage the Tinder-style swipe mechanic to lower the barrier for entry.",
+          },
+          {
+            quote:
+              "I want to trade on the IPL match tonight without opening a complex exchange or using a VPN for Western sites.",
+            role: "Indian Retail Trader",
+            takeaway:
+              "Hyper-localization of content (Kabaddi, IPL, Indian Politics) is the primary user acquisition driver.",
           },
         ],
       },
-      { id: "06", label: "Outcome", title: "Transaction Volume" },
-      { id: "07", label: "Reflection", title: "FinTech Compliance" },
+      {
+        id: "03",
+        label: "Logic",
+        title: "Telegram Mini App Architecture",
+        description:
+          "As the lead frontend developer, I optimized the React Native codebase to run seamlessly within the Telegram Mini App environment, ensuring zero-latency responsiveness on both iOS and Android.",
+        decisions: [
+          "Cross-platform responsiveness for TG Web views",
+          "Secure wallet connection flow for Profile sections",
+          "Haptic feedback integration for successful swipes",
+          "Activity-based point registration system for user retention",
+        ],
+      },
+      {
+        id: "04",
+        label: "Designs",
+        title: "Core Trading Flows",
+        gallery: [
+          {
+            title: "The Swipe Feed",
+            subtitle: "Opinion Trading & Swap",
+            description:
+              "The main home feed where users see questions or tokens and swipe to take a position. It’s designed for rapid decision-making.",
+            imageUrl: "/projects/tyntan/swipe.svg",
+            decisions: [
+              "Card-stack navigation",
+              "Clear Yes/No visual cues",
+              "Immediate price feed updates",
+            ],
+          },
+          {
+            title: "Portfolio Management",
+            subtitle: "Asset Overview",
+            description:
+              "A clean summary of all active transactions and token holdings, designed to be understood at a glance.",
+            imageUrl: "/projects/tyntan/Portfolio.svg",
+            decisions: [
+              "Unified asset list",
+              "Transaction history logging",
+              "Real-time PNL tracking",
+            ],
+          },
+          {
+            title: "Gamification: Points System",
+            subtitle: "User Engagement",
+            description:
+              "A dedicated section where user activity translates into points, fostering a competitive trading community.",
+            imageUrl: "/projects/tyntan/points.svg",
+            decisions: [
+              "Progress bar visualization",
+              "Activity-linked rewards",
+              "Social sharing integration",
+            ],
+          },
+        ],
+      },
+      {
+        id: "05",
+        label: "Identity",
+        title: "Visual Language & Branding",
+        gallery: [
+          {
+            title: "Profile & Security",
+            subtitle: "Wallet Integration",
+            description:
+              "The profile hub where users manage their secure wallet connections with digital signature using metamask and personalized settings.",
+            imageUrl: "/projects/tyntan/profile.svg",
+            decisions: [
+              "Secure-connect UI",
+              "Simplified settings hierarchy",
+              "Avatar customization",
+            ],
+          },
+          {
+            title: "Brand Assets",
+            subtitle: "Logo & Graphics",
+            description:
+              "I designed the TynTan visual identity to feel tech-forward yet accessible. The logos and graphics reflect the fast-paced nature of the app.",
+            imageUrl: "/projects/tyntan/graphics.svg",
+            decisions: [
+              "Vector-based scalability",
+              "Modern gradient palette",
+              "Iconography for TG Mini App menus",
+            ],
+          },
+          {
+            title: "Alternative Logo Design",
+            subtitle: "Visual Flexibility",
+            description:
+              "A secondary logo variation (logo-1.svg) developed to ensure brand legibility across diverse UI environments, from small-scale headers to simplified splash screens.",
+            imageUrl: "/projects/tyntan/logo-1.svg",
+            decisions: [
+              "Simplified geometry for small-scale rendering",
+              "Optimized for high-contrast dark mode environments",
+              "Balanced weighted strokes for consistent visibility",
+            ],
+          },
+        ],
+      },
+      {
+        id: "06",
+        label: "Outcome",
+        title: "Performance & Impact",
+        description:
+          "The app was tested with over 500 users on Day 1, proving the stability of the React Native frontend and the Golang backend architecture.",
+        decisions: [
+          "Successful onboarding of 500+ beta testers in 24 hours.",
+          "High retention rate attributed to the points-based rewards system.",
+          "Seamless performance across mobile web and native Telegram wrappers.",
+        ],
+      },
     ],
   },
   {

@@ -113,19 +113,30 @@ export default function ProjectDetail() {
         {/* TOP HERO: Video & Metadata (Role/Tools) */}
         <div className="p-16 md:p-24 pb-0">
           {/* Only render video container if videoHero exists */}
-          {project.videoHero && (
-            <div className="w-full aspect-video bg-[#0d0d0d] border border-white/10 rounded-[3rem] overflow-hidden mb-12 shadow-2xl relative">
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none z-10" />
-              <video
-                src={project.videoHero}
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="w-full h-full object-cover"
-              />
-            </div>
-          )}
+          {/* Case 1: Video Hero */}
+    {project.videoHero ? (
+      <div className="w-full aspect-video bg-[#0d0d0d] border border-white/10 rounded-[3rem] overflow-hidden mb-12 shadow-2xl relative">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none z-10" />
+        <video 
+          src={project.videoHero} 
+          autoPlay 
+          loop 
+          muted 
+          playsInline 
+          className="w-full h-full object-cover"
+        />
+      </div>
+    ) : project.heroImage ? (
+      /* Case 2: Image Hero (For TynTan / Stepout) */
+      <div className="w-full aspect-video bg-[#0d0d0d] border border-white/10 rounded-[3rem] overflow-hidden mb-12 shadow-2xl relative flex items-center justify-center p-12">
+        <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] to-transparent pointer-events-none" />
+        <img 
+          src={project.heroImage} 
+          alt={`${project.title} Hero`} 
+          className="w-full h-full object-contain rounded-2xl"
+        />
+      </div>
+    ) : null}
 
           {/* Role & Tools Grid - Unified Style */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-20">
