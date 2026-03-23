@@ -178,6 +178,7 @@ display: grid;
   .showcase-grid {
     /* Switch to 1 column only for tablets/mobile */
     grid-template-columns: 1fr;
+    gap: 1rem;
   }
   
   .showcase-project-card {
@@ -204,5 +205,14 @@ display: grid;
 
   .showcase-project-copy p {
     max-width: 100%;
+  }
+
+  .showcase-project-overlay {
+    opacity: 1;
+  }
+
+  .showcase-project-copy {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

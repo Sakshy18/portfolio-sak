@@ -47,7 +47,7 @@ export default function StayAheadCarousel() {
   return (
     <section className="w-full py-32 bg-black overflow-hidden">
       <div className="max-w-[1200px] mx-auto px-8">
-         <div className="flex flex-col items-center mb-16">
+         <div className="flex flex-col items-center mb-16 text-center w-full">
     <GradientText
       colors={["#4f772d", "#90a955", "#ecf39e"]}
       animationSpeed={11.5}
@@ -58,12 +58,14 @@ export default function StayAheadCarousel() {
       style={{ 
        fontSize:'3.9rem',
         fontFamily: "'Georgia', serif", 
-        fontWeight: 200 
+        fontWeight: 200,
+        textAlign: "center",
+        width: "100%"
       }}
     >
     Graphic Designs
     </GradientText>
-       <p className="text-[1.2rem] mt-1.5 text-gray-400 ">Only the top picks, click on view more</p>
+       <p className="text-[1.2rem] mt-1.5 text-gray-400 text-center w-full">Only the top picks, click on view more</p>
         </div>
 
         <div

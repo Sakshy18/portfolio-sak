@@ -1,9 +1,9 @@
-import AnimatedTagCarousel from "./AnimatedTagCarousel";
-import GradientText from "./GradientText";
+import AnimatedTagCarousel from "../components/AnimatedTagCarousel";
+import GradientText from "../components/GradientText";
 
 export default function HeroSection() {
   return (
-    <section className="relative flex flex-col items-center justify-center text-center min-h-[80vh] pb-8">
+    <section className="relative flex flex-col items-center justify-center text-center min-h-[80vh] pb-8 px-5 md:px-0">
       {/* Animated Tag Carousel with glassy effect */}
       <div className="mt-6 mb-2 w-full max-w-96 relative">
         <AnimatedTagCarousel />
@@ -14,7 +14,7 @@ export default function HeroSection() {
       </div>
       
       {/* Headline with green gradient */}
-      <h1 className="text-[2.8rem] md:text-6xl font-semibold leading-tight tracking-tight">
+      <h1 className="text-[2.3rem] md:text-6xl font-semibold leading-tight tracking-tight text-center">
         <span className="text-gray-400 font-normal"  style={{ fontFamily: "'Georgia', serif" }}> I'm Sakshi,</span><br />
 <GradientText
   colors={["#4f772d", "#90a955", "#ecf39e"]}
@@ -41,12 +41,12 @@ export default function HeroSection() {
       </h1>
       
       {/* Description in gray */}
-      <p className="max-w-xl text-lg mt-4 font-normal text-gray-400">
+      <p className="max-w-xl text-base md:text-lg mt-4 font-normal text-gray-400 text-center">
         love building playful digital experiences that blend creativity and functionality.
       </p>
       
       {/* Updated CTA buttons with animations */}
-      <div className="flex gap-4 mt-8">
+      <div className="flex flex-row flex-wrap gap-4 mt-8 justify-center">
         {/* Resume Button - Pastel Green */}
         <a
           href="https://drive.google.com/file/d/1vsPZ8sayrkgJJkwbO3CSfUnxWd_hBeEH/view?usp=sharing"

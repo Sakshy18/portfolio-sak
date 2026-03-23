@@ -1,6 +1,6 @@
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Footer from "./components/Footer";
-import HeroSection from "./components/HeroSection";
+import HeroSection from "./pages/HeroSection";
 import Navbar from "./components/Navbar";
 import ShowcaseSection from "./components/ShowcaseSection";
 import { AnimatePresence } from "framer-motion";
@@ -12,23 +12,19 @@ import ProjectDetail from "./pages/ProjectDetail";
 
 import LandingPageShowcase from "./components/LandingPageShowcase";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import AboutMe from "./pages/AboutMe";
 import Loader from "./components/Loader";
 
 
 function App() {
-
-  const [loading, setLoading] = useState(true);
-useEffect(() => {
-  const hasLoaded = sessionStorage.getItem("loaded");
-
-  if (hasLoaded) {
-    setLoading(false);
-  } else {
+  const [loading, setLoading] = useState(() => {
+    if (typeof window === "undefined") return false;
+    const hasLoadedInSession = sessionStorage.getItem("loaded");
+    if (hasLoadedInSession) return false;
     sessionStorage.setItem("loaded", "true");
-  }
-}, []);
+    return true;
+  });
   return (
     <ThemeProvider>
 
@@ -48,7 +44,7 @@ useEffect(() => {
                   <Navbar />
                   <HeroSection />
 
-                  <div className="p-40 m-20">
+                  <div className="px-4 py-8 sm:px-6 sm:py-10 md:p-40 md:m-20">
                     <ShowcaseSection />
                   </div>
 

@@ -66,7 +66,7 @@ export default function LandingCards() {
   return (
     <section ref={sectionRef} className="clay-section">
       <div className="clay-sticky">
-        <div className="flex flex-col items-center mb-16">
+        <div className="flex flex-col items-center mb-16 text-center w-full">
          <GradientText
             colors={["#4f772d", "#90a955", "#ecf39e"]}
             animationSpeed={11.5}
@@ -77,12 +77,14 @@ export default function LandingCards() {
             style={{ 
              fontSize:'3.9rem',
               fontFamily: "'Georgia', serif", 
-              fontWeight: 200 
+              fontWeight: 200,
+              textAlign: "center",
+              width: "100%"
             }}
           >
          Landing Page Designs
           </GradientText>
-          <p className="text-[1.2rem]  mt-3 text-gray-400 ">Few landing page designs</p>
+          <p className="text-[1.2rem] mt-3 text-gray-400 text-center w-full">Few landing page designs</p>
         </div>
 
         <div className="clay-stage">

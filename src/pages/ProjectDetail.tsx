@@ -38,9 +38,9 @@ export default function ProjectDetail() {
   const isWebsite = project.slug.includes("website");
 
   return (
-    <main className="flex h-screen bg-[#0a0a0a] text-white font-sans overflow-hidden">
+    <main className="flex flex-col md:flex-row h-auto md:h-screen bg-[#0a0a0a] text-white font-sans overflow-visible md:overflow-hidden">
       {/* LEFT SIDE: FIXED SIDEBAR (30% Width) */}
-      <aside className="w-[30%] h-full flex flex-col justify-between p-10 md:p-12 border-r border-white/5 relative bg-[#0a0a0a] z-20">
+      <aside className="w-full md:w-[30%] h-auto md:h-full flex flex-col justify-between p-6 md:p-12 border-b md:border-b-0 md:border-r border-white/5 relative bg-[#0a0a0a] z-20">
         <div>
           <button
             onClick={() => navigate("/")}
@@ -49,11 +49,11 @@ export default function ProjectDetail() {
             <ChevronLeft size={14} /> Case Study
           </button>
 
-          <h1 className="text-3xl md:text-4xl font-bold leading-tight mb-3">
+          <h1 className="text-2xl md:text-4xl font-bold leading-tight mb-3">
             {project.title}
           </h1>
           <div className="flex items-center gap-4">
-            <p className="text-zinc-500 text-sm md:text-base leading-snug max-w-[200px]">
+            <p className="text-zinc-500 text-sm md:text-base leading-snug max-w-full md:max-w-[200px]">
               {project.subtitle}
             </p>
             {project.url && (
@@ -70,22 +70,22 @@ export default function ProjectDetail() {
         </div>
 
         {/* Dynamic Number Indicator */}
-        <div className="relative py-12">
-          <span className="absolute top-0 left-0 text-[12rem] font-bold text-white/[0.02] select-none leading-none -translate-x-8">
+        <div className="relative py-6 md:py-12">
+          <span className="hidden md:block absolute top-0 left-0 text-[12rem] font-bold text-white/[0.02] select-none leading-none -translate-x-8">
             {activeSection}
           </span>
-          <div className="relative z-10 pt-16">
+          <div className="relative z-10 pt-2 md:pt-16">
             <p className="text-zinc-500 font-mono text-[10px] uppercase tracking-widest mb-1">
               Section {activeSection}
             </p>
-            <h2 className="text-4xl font-bold tracking-tight">
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
               {project.sections.find((s) => s.id === activeSection)?.label}
             </h2>
           </div>
         </div>
 
         {/* Navigation Grid */}
-        <div className="grid grid-cols-4 gap-1.5 max-w-[280px]">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-1.5 w-full md:max-w-[280px]">
           {project.sections.map((s) => (
             <button
               key={s.id}
@@ -109,13 +109,13 @@ export default function ProjectDetail() {
       </aside>
 
       {/* RIGHT SIDE: SCROLLABLE CONTENT (70% Width) */}
-      <section className="w-[70%] h-full overflow-y-auto scroll-smooth custom-scrollbar bg-[#0a0a0a]">
+      <section className="w-full md:w-[70%] h-auto md:h-full overflow-visible md:overflow-y-auto scroll-smooth custom-scrollbar bg-[#0a0a0a]">
         {/* TOP HERO: Video & Metadata (Role/Tools) */}
-        <div className="p-16 md:p-24 pb-0">
+        <div className="p-6 md:p-24 pb-0">
           {/* Only render video container if videoHero exists */}
           {/* Case 1: Video Hero */}
     {project.videoHero ? (
-      <div className="w-full aspect-video bg-[#0d0d0d] border border-white/10 rounded-[3rem] overflow-hidden mb-12 shadow-2xl relative">
+      <div className="w-full aspect-video bg-[#0d0d0d] border border-white/10 rounded-[1.5rem] md:rounded-[3rem] overflow-hidden mb-8 md:mb-12 shadow-2xl relative">
         <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none z-10" />
         <video 
           src={project.videoHero} 
@@ -128,7 +128,7 @@ export default function ProjectDetail() {
       </div>
     ) : project.heroImage ? (
       /* Case 2: Image Hero (For TynTan / Stepout) */
-      <div className="w-full aspect-video bg-[#0d0d0d] border border-white/10 rounded-[3rem] overflow-hidden mb-12 shadow-2xl relative flex items-center justify-center p-12">
+      <div className="w-full aspect-video bg-[#0d0d0d] border border-white/10 rounded-[1.5rem] md:rounded-[3rem] overflow-hidden mb-8 md:mb-12 shadow-2xl relative flex items-center justify-center p-4 md:p-12">
         <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] to-transparent pointer-events-none" />
         <img 
           src={project.heroImage} 
@@ -139,8 +139,8 @@ export default function ProjectDetail() {
     ) : null}
 
           {/* Role & Tools Grid - Unified Style */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-20">
-            <div className="bg-white/[0.03] border border-white/5 p-8 rounded-3xl">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-12 md:mb-20">
+            <div className="bg-white/[0.03] border border-white/5 p-6 md:p-8 rounded-3xl">
               <p className="text-zinc-500 text-[10px] uppercase tracking-[0.2em] mb-3">
                 Role
               </p>
@@ -148,7 +148,7 @@ export default function ProjectDetail() {
                 {project.role || "Designer"}
               </p>
             </div>
-            <div className="md:col-span-3 bg-white/[0.03] border border-white/5 p-8 rounded-3xl">
+            <div className="md:col-span-3 bg-white/[0.03] border border-white/5 p-6 md:p-8 rounded-3xl">
               <p className="text-zinc-500 text-[10px] uppercase tracking-[0.2em] mb-3">
                 Tools & Expertise
               </p>
@@ -174,7 +174,7 @@ export default function ProjectDetail() {
             ref={(el) => {
               sectionRefs.current[section.id] = el;
             }}
-            className="h-auto min-h-[50vh] p-16 md:p-24 flex flex-col justify-start border-b border-white/5"
+            className="h-auto min-h-[50vh] p-6 md:p-24 flex flex-col justify-start border-b border-white/5"
           >
             {/* Section Heading & Description */}
             <div className="max-w-3xl mb-12">
@@ -184,11 +184,11 @@ export default function ProjectDetail() {
                 </span>
                 <div className="h-[1px] w-12 bg-white" />
               </div>
-              <h3 className="text-3xl font-bold mb-6 tracking-tight text-zinc-100">
+              <h3 className="text-2xl md:text-3xl font-bold mb-6 tracking-tight text-zinc-100">
                 {section.title}
               </h3>
               {section.description && (
-                <p className="text-xl text-zinc-400 leading-relaxed font-light">
+                <p className="text-lg md:text-xl text-zinc-400 leading-relaxed font-light">
                   {section.description}
                 </p>
               )}
@@ -196,7 +196,7 @@ export default function ProjectDetail() {
 
             {/* Metrics Display */}
             {section.metrics && (
-              <div className="grid grid-cols-3 gap-4 mb-16 max-w-3xl">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-16 max-w-3xl">
                 {section.metrics.map((m, i) => (
                   <div
                     key={i}
@@ -275,7 +275,7 @@ export default function ProjectDetail() {
 
                     {/* Media Block: Fixed for White Gaps */}
                     <div
-                      className={`w-full xl:w-[65%] ${isWebsite ? "aspect-video p-4" : "aspect-square p-12"} bg-[#0d0d0d] border border-white/10 rounded-[3rem] flex items-center justify-center relative overflow-hidden group shadow-2xl`}
+                      className={`w-full xl:w-[65%] ${isWebsite ? "aspect-video p-3 md:p-4" : "aspect-square p-4 md:p-12"} bg-[#0d0d0d] border border-white/10 rounded-[1.5rem] md:rounded-[3rem] flex items-center justify-center relative overflow-hidden group shadow-2xl`}
                     >
                       <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] to-transparent pointer-events-none" />
                       {item.video ? (

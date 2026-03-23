@@ -12,7 +12,7 @@ import SpotifyDandelion from "@/components/SpotifyDandelion";
 
 // --- Shared Card Components ---
 const GlassCard = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
-  <div className={`bg-white/[0.03] border border-white/10 rounded-3xl p-10 ${className}`}>
+  <div className={`bg-white/[0.03] border border-white/10 rounded-3xl p-6 md:p-10 ${className}`}>
     {children}
   </div>
 );
@@ -316,40 +316,40 @@ export default function AboutMe() {
   const scrollToSection = (id: string) => { sectionRefs.current[id]?.scrollIntoView({ behavior: "smooth" }); };
 
   return (
-    <main className="flex h-screen bg-[#0a0a0a] text-white font-sans overflow-hidden">
+    <main className="flex flex-col md:flex-row h-auto md:h-screen bg-[#0a0a0a] text-white font-sans overflow-visible md:overflow-hidden">
       {/* SIDEBAR (30%) */}
-      <aside className="w-[30%] h-full flex flex-col justify-between p-10 md:p-12 border-r border-white/5 bg-[#0a0a0a] z-20">
+      <aside className="w-full md:w-[30%] h-auto md:h-full flex flex-col justify-between p-6 md:p-12 border-b md:border-b-0 md:border-r border-white/5 bg-[#0a0a0a] z-20">
         <div>
           <button onClick={() => navigate("/")} className="flex items-center gap-2 text-zinc-500 hover:text-white transition-colors mb-12 text-[10px] uppercase tracking-[0.2em]">
             <ChevronLeft size={14} /> Back to Portfolio
           </button>
           
-          <div className="flex flex-col gap-6 mb-16">
+          <div className="flex flex-col sm:flex-row md:flex-col items-center sm:items-center md:items-start gap-6 mb-10 md:mb-16">
             <div className="w-24 h-24 rounded-full border border-white/10 p-1 bg-white/[0.02]">
                 <img src={aboutMeData.profilePicUrl} alt={aboutMeData.name} className="w-full h-full rounded-full object-cover grayscale" />
             </div>
-            <div>
+            <div className="text-center md:text-left">
                 <p className="text-zinc-600 font-mono text-[10px] uppercase tracking-widest mb-1">{aboutMeData.title}</p>
                 <h1 className="text-3xl font-bold leading-tight mb-2">{aboutMeData.name}</h1>
-                <p className="text-zinc-500 text-[13px] max-w-[220px] leading-relaxed">{aboutMeData.summary}</p>
+                <p className="text-zinc-500 text-[13px] max-w-full md:max-w-[220px] leading-relaxed">{aboutMeData.summary}</p>
             </div>
           </div>
         </div>
 
         {/* REFINED NUMBER INDICATOR: Adjusted Positioning & Opacity */}
-        <div className="relative h-64 flex items-end">
-          <span className="absolute -bottom-12 -left-10 text-[16rem] font-bold text-white/[0.05] leading-none select-none pointer-events-none z-0">
+        <div className="relative h-auto md:h-64 flex items-end">
+          <span className="hidden md:block absolute -bottom-12 -left-10 text-[16rem] font-bold text-white/[0.05] leading-none select-none pointer-events-none z-0">
             {activeSection}
           </span>
-          <div className="relative z-10 mb-8">
+          <div className="relative z-10 mb-4 md:mb-8">
             <p className="text-zinc-600 font-mono text-[9px] uppercase tracking-[0.3em] mb-2">About Me // Sakshi</p>
-            <h2 className="text-5xl font-bold tracking-tighter">
+            <h2 className="text-3xl md:text-5xl font-bold tracking-tighter">
                 {aboutMeData.sections.find(s => s.id === activeSection)?.label}
             </h2>
           </div>
         </div>
 
-        <div className="grid grid-cols-4 gap-2 max-w-[280px]">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 w-full md:max-w-[280px] mt-6 md:mt-0">
           {aboutMeData.sections.map((s) => (
             <button key={s.id} onClick={() => scrollToSection(s.id)} className={`flex flex-col items-center justify-center py-4 rounded-xl border transition-all duration-500 ${activeSection === s.id ? 'bg-white/10 border-white/20 scale-105 shadow-2xl' : 'bg-white/[0.02] border-white/5 hover:border-white/10'}`}>
               <span className="text-[10px] text-zinc-500 font-mono mb-1">{s.id}</span>
@@ -360,7 +360,7 @@ export default function AboutMe() {
       </aside>
 
       {/* CONTENT (70%) */}
-      <section className="w-[70%] h-full overflow-y-auto scroll-smooth custom-scrollbar bg-[#0a0a0a]">
+      <section className="w-full md:w-[70%] h-auto md:h-full overflow-visible md:overflow-y-auto scroll-smooth custom-scrollbar bg-[#0a0a0a]">
         {aboutMeData.sections.map((section) => (
           <div
             key={section.id}
@@ -368,15 +368,15 @@ export default function AboutMe() {
             ref={(el) => {
               sectionRefs.current[section.id] = el;
             }}
-            className="min-h-screen p-16 md:p-32 flex flex-col justify-start border-b border-white/5"
+            className="min-h-[80vh] md:min-h-screen p-6 md:p-32 flex flex-col justify-start border-b border-white/5"
           >
-            <div className="max-w-3xl mb-24">
-              <div className="flex items-center gap-4 mb-8 opacity-20">
+            <div className="max-w-3xl mb-12 md:mb-24">
+              <div className="flex items-center gap-4 mb-6 md:mb-8 opacity-20">
                   <span className="text-xs font-mono tracking-widest">{section.id}</span>
                   <div className="h-[1px] w-16 bg-white" />
               </div>
-              <h3 className="text-4xl font-bold mb-8 text-zinc-100 tracking-tight">{section.title}</h3>
-              {section.description && <p className="text-2xl text-zinc-400 leading-relaxed font-light">{section.description}</p>}
+              <h3 className="text-3xl md:text-4xl font-bold mb-6 md:mb-8 text-zinc-100 tracking-tight">{section.title}</h3>
+              {section.description && <p className="text-xl md:text-2xl text-zinc-400 leading-relaxed font-light">{section.description}</p>}
             </div>
 
             {section.experience && <ExperienceView entries={section.experience} />}
