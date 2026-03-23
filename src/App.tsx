@@ -5,11 +5,12 @@ import Navbar from "./components/Navbar";
 import ShowcaseSection from "./components/ShowcaseSection";
 
 import { Routes, Route } from "react-router-dom";
-import ProjectDetail from "./pages/ProjectDetail";
 import LandingPageShowcase from "./components/LandingPageShowcase";
 import StayAheadCarousel from "./components/StayAheadCarousel";
 import Designs from "./pages/Designs";
 import SplashCursor from "./components/SplashCursor";
+import ProjectDetail from "./pages/ProjectDetail";
+import AboutMe from "./pages/Aboutme";
 
 function App() {
   return (
@@ -23,7 +24,7 @@ function App() {
               <Navbar />
               <HeroSection />
 
-              <LandingPageShowcase />
+              {/* <LandingPageShowcase /> */}
               <div className="p-40, m-20">
                 <ShowcaseSection />
               </div>
@@ -32,8 +33,9 @@ function App() {
             </>
           }
         />
-        <Route path="/projects/:slug" element={<ProjectDetail />} />
+      <Route path="/project/:slug" element={<ProjectDetail />} />
          <Route path="/designs" element={<Designs />} />
+         <Route path="/about" element={<AboutMe />} />
       </Routes>
     </ThemeProvider>
   );

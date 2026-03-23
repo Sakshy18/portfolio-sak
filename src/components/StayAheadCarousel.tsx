@@ -1,5 +1,6 @@
 import { motion, useMotionValue, animate } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import GradientText from "./GradientText";
 
 const baseItems = [
   { id: 1, title: "AI Content", image: "/assets/designs/3.svg" },
@@ -46,13 +47,22 @@ export default function StayAheadCarousel() {
     <section className="w-full py-32 bg-black overflow-hidden">
       <div className="max-w-[1200px] mx-auto px-8">
          <div className="flex flex-col items-center mb-16">
-     <div className="text-6xl bg-clip-text text-transparent"  style={{fontFamily: "'Georgia', serif" , fontWeight: 500,
-            backgroundImage: `linear-gradient(45deg, var(--color-gradient-from), var(--color-gradient-via), var(--color-gradient-to))`
-          }}>
-        <h2>Graphic Designs </h2>
-       
-      </div>
-       <p className="text-2xl mt-1.5 text-gray-400 ">Only the top picks, click on view more</p>
+    <GradientText
+      colors={["#4f772d", "#90a955", "#ecf39e"]}
+      animationSpeed={11.5}
+      showBorder={false}
+      // Keep the className for any tailwind/global spacing if needed
+      className="font-bold" 
+      // Add the style prop here
+      style={{ 
+       fontSize:'3.9rem',
+        fontFamily: "'Georgia', serif", 
+        fontWeight: 200 
+      }}
+    >
+    Graphic Designs
+    </GradientText>
+       <p className="text-[1.2rem] mt-1.5 text-gray-400 ">Only the top picks, click on view more</p>
         </div>
 
         <div

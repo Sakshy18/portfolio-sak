@@ -1,38 +1,8 @@
 import { useRef } from "react";
 import "./showcase-section.css";
-
-const projects = [
-  {
-    title: "Buddy Website",
-    description: "Landing page for a community platform",
-  image: "/projects/buddy-home.png",
-  },
-  {
-    title: "One Dash",
-    description: "A dashboard for stakeholders to analyze data",
-   image: "/projects/one-dash.png",
-  },
-  {
-    title: "Buddy App",
-    description: "A one stop solution for moving out of your home",
-    image: "/projects/buddy-app.webp",
-  },
-  {
-    title: "Stepout",
-    description: "A football analysis platform for players and coaches",
-    image: "/projects/stepout.webp",  
-  },
-  {
-    title:"TynTan",
-    description: "Buy and sell tokens with a swipe",
-    image: "/projects/tyntan.webp", 
-  },
-    {
-    title: "Fans On Chain",
-    description: "Tokenize your fandom and earn rewards",
-    image: "/projects/fans-oon-chain.png",  
-  },
-];
+import { projectsData } from "../pages/projectsData";
+import { Link } from "react-router-dom";
+import GradientText from "./GradientText";
 
 export default function ShowcaseSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -44,38 +14,55 @@ export default function ShowcaseSection() {
           Projects
         </button>
 
-        <div className="flex flex-col items-center mb-16">
-          <div
-            className="text-6xl bg-clip-text text-transparent"
-            style={{
-              fontFamily: "'Georgia', serif",
-              fontWeight: 500,
-              backgroundImage: `linear-gradient(45deg, var(--color-gradient-from), var(--color-gradient-via), var(--color-gradient-to))`,
-            }}
-          >
-            <h2>End to End designs</h2>
-          </div>
-          <p className="text-2xl mt-1.5 text-gray-400">One of the top projects</p>
-        </div>
+       <div className="flex flex-col items-center text-center mb-16">
+  <div
+    className="showcase-title-wrapper"
+
+  >
+ <GradientText
+   colors={["#4f772d", "#90a955", "#ecf39e"]}
+   animationSpeed={11.5}
+   showBorder={false}
+   // Keep the className for any tailwind/global spacing if needed
+   className="font-bold" 
+   // Add the style prop here
+   style={{ 
+    fontSize:'3.9rem',
+     fontFamily: "'Georgia', serif", 
+     fontWeight: 200 
+   }}
+ >
+ End to End Designs
+ </GradientText>
+  </div>
+  <p className="text-[1.2rem] md:text-2xl mt-3 text-gray-400">
+    One of the top projects
+  </p>
+</div>
 
         <div className="showcase-grid">
-          {projects.map((project) => (
-            <article key={project.title} className="showcase-project-card">
-              <div className="showcase-project-media">
-                <img 
-                  src={project.image} 
-                  alt={project.title} 
-                  className="showcase-project-img" 
-                />
-                {/* Overlay for hover effect */}
-                <div className="showcase-project-overlay"></div>
-              </div>
-              
-              <div className="showcase-project-copy">
-                <h3>{project.title}</h3>
-                <p>{project.description}</p>
-              </div>
-            </article>
+          {projectsData.map((project) => (
+            <Link 
+              to={`/project/${project.slug}`} 
+              key={project.slug} 
+              className="showcase-project-link"
+            >
+              <article className="showcase-project-card">
+                <div className="showcase-project-media">
+                  <img 
+                    src={project.image} 
+                    alt={project.title} 
+                    className="showcase-project-img" 
+                  />
+                  <div className="showcase-project-overlay"></div>
+                </div>
+                
+                <div className="showcase-project-copy">
+                  <h3>{project.title}</h3>
+                  <p>{project.subtitle}</p>
+                </div>
+              </article>
+            </Link>
           ))}
         </div>
       </div>

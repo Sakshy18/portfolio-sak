@@ -1,27 +1,36 @@
-export default function Designs() {
-  return (
-    <div className="min-h-screen bg-black text-white px-12 py-24">
-      <h1 className="text-6xl mb-16">Design Experiments</h1>
+import DomeGallery from '../components/DomeGallery'; // Ensure this path matches your file structure
 
-     <div className="grid grid-cols-5 gap-12">
-        {Array.from({ length: 75 }).map((_, i) => (
-          <div
-            key={i}
-            className="relative w-full rounded-xl overflow-hidden bg-zinc-900 group
-             transition-transform duration-500 ease-out
-             hover:scale-[1.03] hover:-translate-y-2"
-          >
-            <img
-              src={`/assets/designs/${i + 1}.svg`}
-             className="w-full h-full object-cover
-             transition-transform duration-700 ease-out
-             group-hover:scale-110"
-            />
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition
-                bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-          </div>
-        ))}
+export default function Designs() {
+  // Map your 75 images to the format expected by DomeGallery
+const myDesigns = Array.from({ length: 75 }).map((_, i) => ({
+    src: `/assets/designs/${i + 1}.svg`,
+    alt: `Design Experiment ${i + 1}`
+  }));
+
+  return (
+    <main className="min-h-screen bg-black text-white">
+      {/* Header overlay so it stays on top of the gallery */}
+   
+
+      {/* Dome Gallery Container */}
+      <div className="w-screen h-screen overflow-hidden bg-[#050505]">
+     <DomeGallery 
+        images={myDesigns} // <--- CHANGED FROM 'items' TO 'images'
+        fit={0.9} 
+        minRadius={800} 
+        segments={34} 
+        dragDampening={2.5}
+        maxVerticalRotationDeg={0}
+        grayscale={false} // Set to false if you want to see your SVG colors
+      />
       </div>
-    </div>
+      
+      {/* Optional: Add a subtle instruction at the bottom */}
+      <div className="absolute bottom-10 w-full text-center z-10 pointer-events-none">
+        <span className="text-[10px] uppercase tracking-[0.3em] text-zinc-600 animate-pulse">
+          Click and Drag to Orbit
+        </span>
+      </div>
+    </main>
   );
 }

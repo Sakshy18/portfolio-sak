@@ -1,4 +1,5 @@
 import AnimatedTagCarousel from "./AnimatedTagCarousel";
+import GradientText from "./GradientText";
 
 export default function HeroSection() {
   return (
@@ -15,14 +16,28 @@ export default function HeroSection() {
       {/* Headline with green gradient */}
       <h1 className="text-[2.8rem] md:text-6xl font-semibold leading-tight tracking-tight">
         <span className="text-gray-400 font-normal"  style={{ fontFamily: "'Georgia', serif" }}> I'm Sakshi,</span><br />
-        <span 
+<GradientText
+  colors={["#4f772d", "#90a955", "#ecf39e"]}
+  animationSpeed={11.5}
+  showBorder={false}
+  // Keep the className for any tailwind/global spacing if needed
+  className="font-bold" 
+  // Add the style prop here
+  style={{ 
+    fontFamily: "'Georgia', serif", 
+    fontWeight: 200 
+  }}
+>
+  I Design & Develop.
+</GradientText>
+        {/* <span 
           className="font-bold bg-clip-text text-transparent"
           style={{fontFamily: "'Georgia', serif" , fontWeight: 200,
             backgroundImage: `linear-gradient(45deg, var(--color-gradient-from), var(--color-gradient-via), var(--color-gradient-to))`
           }}
         >
           I Design & Develop.
-        </span>
+        </span> */}
       </h1>
       
       {/* Description in gray */}

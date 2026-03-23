@@ -15,11 +15,23 @@
   z-index: 0;
   opacity: 0.9;
 }
+.showcase-title-wrapper {
+  display: inline-block;
+  background-clip: text;
+  -webkit-background-clip: text;
+  text-align: center; /* Ensures text inside is centered */
+  width: 100%;
+}
+
+.showcase-title-wrapper h2 {
+  margin: 0;
+  text-align: center;
+}
 
 .showcase-grid-shell {
   position: relative;
   z-index: 1;
-  width: min(1500px, 100%);
+width: min(1400px, 100%);
   margin: 0 auto;
 }
 
@@ -44,14 +56,11 @@
 }
 
 .showcase-project-card {
-
-  position: relative;
+position: relative;
   border-radius: 1.5rem;
   overflow: hidden;
-grid-column: span 6;
-  /* Adjust the height to be shorter than a square but wider */
-  aspect-ratio: 16 / 9; 
-  min-height: auto; /* Remove the old clamp min-height */
+  width: 100%;
+  aspect-ratio: 16 / 10; /* Slightly taller than 16:9 to match your 1024px reference */
   background:
     linear-gradient(160deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.02)),
     rgba(255, 255, 255, 0.04);
@@ -59,16 +68,17 @@ grid-column: span 6;
   box-shadow: 0 22px 50px rgba(0, 0, 0, 0.34);
   backdrop-filter: blur(8px);
 }
-
 .showcase-project-card:nth-child(-n + 3),
 .showcase-project-card:nth-child(n + 4) {
-  grid-column: span 6;
+  grid-column: auto; 
 }
 
 .showcase-grid {
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: 1.4rem;
+  
+display: grid;
+  /* Force 2 columns for 1024px, 1440px, and everything in between */
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 2rem;
 }
 
 
@@ -91,7 +101,10 @@ grid-column: span 6;
 
   transition: transform 0.5s ease;
 }
-
+.showcase-project-link {
+  display: block;
+  text-decoration: none;
+}
 /* Dark overlay that appears on hover */
 .showcase-project-overlay {
   position: absolute;
@@ -145,10 +158,11 @@ grid-column: span 6;
 
 
 @media (max-width: 1024px) {
-  .showcase-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+.showcase-grid {
+    /* Maintain the 2 columns here as well */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.4rem;
   }
-
   .showcase-project-card:nth-child(-n + 3),
   .showcase-project-card:nth-child(n + 4) {
     grid-column: span 1;
@@ -160,15 +174,30 @@ grid-column: span 6;
 }
 
 @media (max-width: 640px) {
-  .showcase-project-card {
-    grid-column: span 12; /* One per row on mobile */
-    aspect-ratio: auto;
-    min-height: 250px;
-  }
+
   .showcase-grid {
+    /* Switch to 1 column only for tablets/mobile */
     grid-template-columns: 1fr;
   }
+  
+  .showcase-project-card {
+    aspect-ratio: 16 / 11; /* Better for vertical mobile scrolling */
+  }
 
+.showcase-grid-section .flex-col {
+    align-items: center !important;
+    text-align: center !important;
+  }
+  
+  .showcase-title-wrapper h2 {
+    font-size: 2.5rem; /* Adjusts title size for small screens */
+    line-height: 1.2;
+  }
+
+  .showcase-grid-section p {
+    text-align: center;
+    width: 100%;
+  }
   .showcase-project-card:last-child {
     grid-column: span 1;
   }
