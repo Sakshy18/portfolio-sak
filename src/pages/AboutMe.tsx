@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { ChevronLeft } from "lucide-react";
-import { aboutMeData } from "./aboutMeData";
-import type { AboutSection, GalleryItem, SkillGroup, EducationEntry, ExperienceEntry } from "./aboutMeData";
+import { aboutMeData } from "../data/aboutMeData";
+import type { AboutSection, GalleryItem, SkillGroup, EducationEntry, ExperienceEntry } from "../data/aboutMeData";
 
 // --- Shared Card Components ---
 const GlassCard = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (

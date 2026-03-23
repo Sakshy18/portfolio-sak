@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import "./showcase-section.css";
-import { projectsData } from "../pages/projectsData";
+import { projectsData } from "../data/projectsData";
 import { Link } from "react-router-dom";
 import GradientText from "./GradientText";
 
