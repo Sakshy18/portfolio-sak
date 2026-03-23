@@ -9,7 +9,7 @@ import StayAheadCarousel from "./components/StayAheadCarousel";
 import Designs from "./pages/Designs";
 import SplashCursor from "./components/SplashCursor";
 import ProjectDetail from "./pages/ProjectDetail";
-
+import { Analytics } from "@vercel/analytics/react"
 import LandingPageShowcase from "./components/LandingPageShowcase";
 
 import { useState } from "react";
@@ -61,7 +61,7 @@ function App() {
           </Routes>
         </>
       )}
-
+   <Analytics />
     </ThemeProvider>
   );
 }
