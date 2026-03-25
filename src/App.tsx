@@ -17,10 +17,10 @@ import Loader from "./components/Loader";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 
 const PRELOAD_MOBILE_LANDING = [
-  "/assets/designs/1.svg",
-  "/assets/designs/2.svg",
-  "/assets/designs/3.svg",
-  "/assets/designs/4.svg",
+  "/assets/flip1.png",
+  "/assets/flip2.png",
+  "/assets/flip3.png",
+  "/assets/flip4.png",
 ];
 
 const PRELOAD_DESKTOP_LANDING = ["/assets/flip1.png", "/assets/flip2.png"];

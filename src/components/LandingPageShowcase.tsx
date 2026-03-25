@@ -7,14 +7,6 @@ import flip5 from "/assets/flip5.png";
 import flip6 from "/assets/flip6.png";
 import flip7 from "/assets/flip7.png";
 import flip8 from "/assets/flip8.png";
-import design1 from "/assets/designs/1.svg";
-import design2 from "/assets/designs/2.svg";
-import design3 from "/assets/designs/3.svg";
-import design4 from "/assets/designs/4.svg";
-import design5 from "/assets/designs/5.svg";
-import design6 from "/assets/designs/6.svg";
-import design7 from "/assets/designs/7.svg";
-import design8 from "/assets/designs/8.svg";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -24,7 +16,7 @@ import SuspenseImage from "./ui/SuspenseImage";
 gsap.registerPlugin(ScrollTrigger);
 
 const desktopImages = [flip1, flip2, flip3, flip4, flip5, flip6, flip7, flip8];
-const mobileImages = [design1, design2, design3, design4, design5, design6, design7, design8];
+const mobileImages = [flip1, flip2, flip3, flip4, flip5, flip6, flip7, flip8];
 
 export default function LandingCards() {
   const sectionRef = useRef<HTMLDivElement>(null);
