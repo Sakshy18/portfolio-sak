@@ -143,7 +143,7 @@ const HobbiesView = ({ items }: { items: GalleryItem[] }) => {
 
   return (
     <div className="flex flex-col gap-48">
-      {items.map((item, idx) => {
+      {items.filter((item) => !(isPhone && item.type === "spotify")).map((item, idx) => {
 
         // ✅ SIMPLE GRID SECTION
         if (item.type === "grid" && item.images && !Array.isArray(item.images)) {
@@ -287,24 +287,22 @@ const HobbiesView = ({ items }: { items: GalleryItem[] }) => {
             </div>
 
             {/* RIGHT PANEL */}
-            {!(isPhone && item.type === "spotify") && (
-              <div className="w-full xl:w-[65%] aspect-square bg-[#0d0d0d] border border-white/5 rounded-[3rem] flex items-center justify-center p-0 xl:p-6 relative overflow-hidden shadow-2xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] to-transparent pointer-events-none" />
+            <div className="w-full xl:w-[65%] aspect-square bg-[#0d0d0d] border border-white/5 rounded-[3rem] flex items-center justify-center p-0 xl:p-6 relative overflow-hidden shadow-2xl">
+              <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] to-transparent pointer-events-none" />
 
-                {item.type === "spotify" ? (
-                  <SpotifyDandelion
-                    onHover={handleHover}
-                    onLeave={handleLeave}
-                  />
-                ) : (
-                  <SuspenseImage
-                    src={item.imageUrl}
-                    alt={item.title}
-                    className="max-h-full w-auto object-contain rounded-2xl"
-                  />
-                )}
-              </div>
-            )}
+              {item.type === "spotify" ? (
+                <SpotifyDandelion
+                  onHover={handleHover}
+                  onLeave={handleLeave}
+                />
+              ) : (
+                <SuspenseImage
+                  src={item.imageUrl}
+                  alt={item.title}
+                  className="max-h-full w-auto object-contain rounded-2xl"
+                />
+              )}
+            </div>
           </div>
         );
       })}
