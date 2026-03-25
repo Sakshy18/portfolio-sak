@@ -11,10 +11,19 @@ import SplashCursor from "./components/SplashCursor";
 import ProjectDetail from "./pages/ProjectDetail";
 import { Analytics } from "@vercel/analytics/react";
 import LandingPageShowcase from "./components/LandingPageShowcase";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AboutMe from "./pages/AboutMe";
 import Loader from "./components/Loader";
 import { SpeedInsights } from "@vercel/speed-insights/react";
+
+const PRELOAD_MOBILE_LANDING = [
+  "/assets/designs/1.svg",
+  "/assets/designs/2.svg",
+  "/assets/designs/3.svg",
+  "/assets/designs/4.svg",
+];
+
+const PRELOAD_DESKTOP_LANDING = ["/assets/flip1.png", "/assets/flip2.png"];
 
 function App() {
   const [loading, setLoading] = useState(() => {
@@ -24,6 +33,23 @@ function App() {
     sessionStorage.setItem("loaded", "true");
     return true;
   });
+
+  useEffect(() => {
+    if (!loading) return;
+
+    const isPhone = window.matchMedia("(max-width: 767px)").matches;
+    const preloadList = isPhone ? PRELOAD_MOBILE_LANDING : PRELOAD_DESKTOP_LANDING;
+    const timer = window.setTimeout(() => {
+      preloadList.forEach((src) => {
+        const img = new Image();
+        img.decoding = "async";
+        img.src = src;
+      });
+    }, 0);
+
+    return () => window.clearTimeout(timer);
+  }, [loading]);
+
   return (
     <ThemeProvider>
       <AnimatePresence>

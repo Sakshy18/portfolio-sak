@@ -26,6 +26,11 @@
   background: black;
 }
 
+.clay-card-wrap {
+  position: absolute;
+  inset: 0;
+}
+
 .clay-stage {
   perspective: 2000px;
   contain: layout paint;
@@ -60,6 +65,46 @@
   height: auto;
   aspect-ratio: 16 / 10;
   display: block;
+}
+
+.clay-card-static-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+}
+
+.clay-skeleton {
+  position: absolute;
+  inset: 0;
+  border-radius: 28px;
+  background: linear-gradient(110deg, #171717 25%, #262626 38%, #171717 55%);
+  background-size: 240% 100%;
+  animation: clay-shimmer 1.6s linear infinite;
+  opacity: 1;
+  transition: opacity 260ms ease;
+}
+
+.clay-skeleton-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.clay-image-loading {
+  opacity: 0;
+}
+
+.clay-image-loaded {
+  opacity: 1;
+  transition: opacity 260ms ease;
+}
+
+@keyframes clay-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }
 
 @media (max-width: 640px) {

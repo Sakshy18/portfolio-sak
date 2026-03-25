@@ -1,12 +1,20 @@
 import "./landing-showcase.css";
-import flip1 from "/assets/flip1.svg";
-import flip2 from "/assets/flip2.svg";
-import flip3 from "/assets/flip3.svg";
-import flip4 from "/assets/flip4.svg";
-import flip5 from "/assets/flip5.svg";
-import flip6 from "/assets/flip6.svg";
-import flip7 from "/assets/flip7.svg";
-import flip8 from "/assets/flip8.svg";
+import flip1 from "/assets/flip1.png";
+import flip2 from "/assets/flip2.png";
+import flip3 from "/assets/flip3.png";
+import flip4 from "/assets/flip4.png";
+import flip5 from "/assets/flip5.png";
+import flip6 from "/assets/flip6.png";
+import flip7 from "/assets/flip7.png";
+import flip8 from "/assets/flip8.png";
+import design1 from "/assets/designs/1.svg";
+import design2 from "/assets/designs/2.svg";
+import design3 from "/assets/designs/3.svg";
+import design4 from "/assets/designs/4.svg";
+import design5 from "/assets/designs/5.svg";
+import design6 from "/assets/designs/6.svg";
+import design7 from "/assets/designs/7.svg";
+import design8 from "/assets/designs/8.svg";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -15,17 +23,20 @@ import SuspenseImage from "./ui/SuspenseImage";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const images = [flip1, flip2, flip3, flip4, flip5, flip6, flip7, flip8];
+const desktopImages = [flip1, flip2, flip3, flip4, flip5, flip6, flip7, flip8];
+const mobileImages = [design1, design2, design3, design4, design5, design6, design7, design8];
 
 export default function LandingCards() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLImageElement[]>([]);
   const [isMobile, setIsMobile] = useState(false);
   const [isLiteMode, setIsLiteMode] = useState(false);
+  const [loadedMap, setLoadedMap] = useState<Record<string, boolean>>({});
+  const activeImages = isMobile || isLiteMode ? mobileImages : desktopImages;
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
-      images.slice(0, 2).forEach((src) => {
+      activeImages.slice(0, 3).forEach((src) => {
         const img = new Image();
         img.decoding = "async";
         img.src = src;
@@ -33,7 +44,7 @@ export default function LandingCards() {
     }, 0);
 
     return () => window.clearTimeout(timer);
-  }, []);
+  }, [activeImages]);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 640px)");
@@ -79,19 +90,19 @@ export default function LandingCards() {
       ScrollTrigger.create({
         trigger: sectionRef.current,
         start: "top top",
-        end: () => "+=" + window.innerHeight * (images.length + 0.5),
+        end: () => "+=" + window.innerHeight * (desktopImages.length + 0.5),
         scrub: true,
         pin: true,
         onUpdate: (self) => {
-          const progress = self.progress * images.length;
+          const progress = self.progress * desktopImages.length;
 
           cards.forEach((_, i) => {
             const p = progress - i;
             const rotation = Math.min(
               Math.max(p * 120, 0),
-              i === images.length - 1 ? 0 : 120
+              i === desktopImages.length - 1 ? 0 : 120
             );
-            const zIndex = images.length - i;
+            const zIndex = desktopImages.length - i;
 
             if (Math.abs(rotation - previousRotation[i]) > 0.2) {
               rotationSetters[i](rotation);
@@ -114,6 +125,10 @@ export default function LandingCards() {
       cardsRef.current = [];
     };
   }, [isMobile, isLiteMode]);
+
+  const setLoaded = (src: string) => {
+    setLoadedMap((prev) => (prev[src] ? prev : { ...prev, [src]: true }));
+  };
 
   return (
     <section ref={sectionRef} className={`clay-section ${isMobile || isLiteMode ? "clay-section-mobile" : ""}`}>
@@ -141,30 +156,42 @@ export default function LandingCards() {
 
         {isMobile || isLiteMode ? (
           <div className="clay-stack">
-            {images.map((flip, i) => (
-              <SuspenseImage
-                key={i}
-                src={flip}
-                className="clay-card clay-card-static"
-                alt={`Landing design ${i + 1}`}
-                priority={i < 3}
-              />
+            {activeImages.map((imageSrc, i) => (
+              <div key={i} className="clay-card-static-wrap">
+                <div
+                  className={`clay-skeleton ${loadedMap[imageSrc] ? "clay-skeleton-hidden" : ""}`}
+                  aria-hidden="true"
+                />
+                <SuspenseImage
+                  src={imageSrc}
+                  className={`clay-card clay-card-static ${loadedMap[imageSrc] ? "clay-image-loaded" : "clay-image-loading"}`}
+                  alt={`Landing design ${i + 1}`}
+                  priority={i < 3}
+                  onLoad={() => setLoaded(imageSrc)}
+                />
+              </div>
             ))}
           </div>
         ) : (
           <div className="clay-stage">
             <div className="clay-frame">
-              {images.map((flip, i) => (
-                <SuspenseImage
-                  key={i}
-                  src={flip}
-                  ref={(el) => {
-                    if (el) cardsRef.current[i] = el;
-                  }}
-                  className="clay-card"
-                  alt={`Landing design ${i + 1}`}
-                  priority={i < 3}
-                />
+              {activeImages.map((imageSrc, i) => (
+                <div key={i} className="clay-card-wrap">
+                  <div
+                    className={`clay-skeleton ${loadedMap[imageSrc] ? "clay-skeleton-hidden" : ""}`}
+                    aria-hidden="true"
+                  />
+                  <SuspenseImage
+                    src={imageSrc}
+                    ref={(el) => {
+                      if (el) cardsRef.current[i] = el;
+                    }}
+                    className={`clay-card ${loadedMap[imageSrc] ? "clay-image-loaded" : "clay-image-loading"}`}
+                    alt={`Landing design ${i + 1}`}
+                    priority={i < 3}
+                    onLoad={() => setLoaded(imageSrc)}
+                  />
+                </div>
               ))}
             </div>
           </div>
