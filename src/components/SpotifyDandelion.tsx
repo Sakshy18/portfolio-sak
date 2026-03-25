@@ -57,7 +57,14 @@ export default function SpotifyDandelion({
   }, []);
 
   return (
-    <svg viewBox="0 0 300 300" className="w-full h-full max-w-[500px]">
+    <svg
+      viewBox="0 0 300 300"
+      className="w-full h-full max-w-[500px]"
+      onPointerLeave={() => {
+        setActive(null);
+        onLeave?.();
+      }}
+    >
       
       {/* 🌑 CENTER NODE (subtle breathing) */}
       <motion.circle
@@ -78,15 +85,9 @@ export default function SpotifyDandelion({
       {nodes.map((n, i) => (
         <motion.g
           key={i}
-          // 🌿 subtle floating sway
-          animate={{
-            x: [0, 4, -2, 0],
-            y: [0, -2, 4, 0]
-          }}
-          transition={{
-            duration: 6 + i, // slight variation per node
-            repeat: Infinity,
-            ease: "easeInOut"
+          onPointerEnter={() => {
+            setActive(i);
+            onHover?.(n);
           }}
         >
           {/* 🔗 LINE */}
@@ -95,6 +96,7 @@ export default function SpotifyDandelion({
             y1={CENTER}
             x2={n.x}
             y2={n.y}
+            pointerEvents="none"
             initial={false}
             animate={{
               strokeWidth: active === i ? 2 : 1,
@@ -111,12 +113,22 @@ export default function SpotifyDandelion({
             cx={n.x}
             cy={n.y}
             fill={n.color}
+            pointerEvents="none"
             initial={false}
             animate={{
               r: active === i ? n.size * 2.2 : n.size * 1.6,
               opacity: active === i ? 0.18 : 0.06
             }}
             transition={{ duration: 0.3 }}
+          />
+
+          {/* 🔵 NODE */}
+          <motion.circle
+            cx={n.x}
+            cy={n.y}
+            r={Math.max(n.size + 12, 24)}
+            fill="transparent"
+            style={{ cursor: "pointer" }}
           />
 
           {/* 🔵 NODE */}
@@ -134,14 +146,7 @@ export default function SpotifyDandelion({
               ease: [0.4, 0, 0.2, 1]
             }}
             style={{ cursor: "pointer" }}
-            onMouseEnter={() => {
-              setActive(i);
-              onHover?.(n);
-            }}
-            onMouseLeave={() => {
-              setActive(null);
-              onLeave?.();
-            }}
+            pointerEvents="none"
           />
         </motion.g>
       ))}

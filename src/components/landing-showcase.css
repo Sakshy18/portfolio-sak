@@ -8,6 +8,7 @@
   max-height: 72vh;
   aspect-ratio: 16 / 10;
   position: relative;
+  contain: layout paint;
 }
 
 .clay-card {
@@ -19,12 +20,15 @@
   object-position: center;
   border-radius: 28px;
   backface-visibility: hidden;
-  box-shadow: 0 50px 120px rgba(0, 0, 0, 0.6);
+  transform: translateZ(0);
+  will-change: transform;
+  box-shadow: 0 24px 52px rgba(0, 0, 0, 0.45);
   background: black;
 }
 
 .clay-stage {
   perspective: 2000px;
+  contain: layout paint;
 }
 
 .clay-sticky {

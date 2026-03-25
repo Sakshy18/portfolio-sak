@@ -60,7 +60,7 @@ export const projectsData: Project[] = [
     ],
     videoHero: "/projects/buddy-web/hero-exp.mov",
     subtitle: "Landing page for a community platform",
-    image: "/projects/buddy-home.png",
+    image: "/projects/buddy-home.webp",
     url: "https://www.buddyapp.co.in/",
     sections: [
       {
@@ -147,7 +147,7 @@ export const projectsData: Project[] = [
     title: "One Dash",
     subtitle:
       "Affiliated dashboard and analytical insights ecosystem for Google products.",
-    image: "/projects/one-dash.png",
+    image: "/projects/one-dash.webp",
 
     role: "UX/UI Designer & Strategy",
     tools: [
@@ -814,7 +814,7 @@ export const projectsData: Project[] = [
   subtitle: "AI-Powered Fan Vaults: Profit from your team's success",
   role: "Lead Product Designer",
   tools: ["Figma", "Framer", "Web3 Integration", "User Research", "Data Visualization"],
-  image: "/projects/fans-oon-chain.png", 
+  image: "/projects/fans-oon-chain.webp", 
    url: "https://precious-minds-500179.framer.app/",
   sections: [
     {

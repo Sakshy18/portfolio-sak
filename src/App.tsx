@@ -14,7 +14,7 @@ import LandingPageShowcase from "./components/LandingPageShowcase";
 import { useState } from "react";
 import AboutMe from "./pages/AboutMe";
 import Loader from "./components/Loader";
-import { SpeedInsights } from "@vercel/speed-insights/next";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
 function App() {
   const [loading, setLoading] = useState(() => {

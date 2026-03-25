@@ -21,11 +21,13 @@ export default function LandingCards() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLImageElement[]>([]);
   const [isMobile, setIsMobile] = useState(false);
+  const [isLiteMode, setIsLiteMode] = useState(false);
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
-      images.forEach((src) => {
+      images.slice(0, 2).forEach((src) => {
         const img = new Image();
+        img.decoding = "async";
         img.src = src;
       });
     }, 0);
@@ -43,15 +45,36 @@ export default function LandingCards() {
     return () => mediaQuery.removeEventListener("change", updateMobile);
   }, []);
 
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const updateLiteMode = () => {
+      const memory = (navigator as Navigator & { deviceMemory?: number }).deviceMemory ?? 8;
+      setIsLiteMode(mediaQuery.matches || memory <= 4);
+    };
+
+    updateLiteMode();
+    mediaQuery.addEventListener("change", updateLiteMode);
+    return () => mediaQuery.removeEventListener("change", updateLiteMode);
+  }, []);
+
   useLayoutEffect(() => {
-    if (!sectionRef.current || isMobile) return;
+    if (!sectionRef.current || isMobile || isLiteMode) return;
     const cards = cardsRef.current;
 
     const ctx = gsap.context(() => {
       gsap.set(cards, {
         transformOrigin: "left center",
         transformStyle: "preserve-3d",
+        force3D: true,
+        willChange: "transform",
       });
+
+      const rotationSetters = cards.map((card) =>
+        gsap.quickSetter(card, "rotateY", "deg")
+      );
+      const zIndexSetters = cards.map((card) => gsap.quickSetter(card, "zIndex"));
+      const previousRotation = cards.map(() => -1);
+      const previousZIndex = cards.map(() => -1);
 
       ScrollTrigger.create({
         trigger: sectionRef.current,
@@ -62,17 +85,23 @@ export default function LandingCards() {
         onUpdate: (self) => {
           const progress = self.progress * images.length;
 
-          cards.forEach((card, i) => {
+          cards.forEach((_, i) => {
             const p = progress - i;
             const rotation = Math.min(
               Math.max(p * 120, 0),
               i === images.length - 1 ? 0 : 120
             );
+            const zIndex = images.length - i;
 
-            gsap.set(card, {
-              rotateY: rotation,
-              zIndex: images.length - i,
-            });
+            if (Math.abs(rotation - previousRotation[i]) > 0.2) {
+              rotationSetters[i](rotation);
+              previousRotation[i] = rotation;
+            }
+
+            if (previousZIndex[i] !== zIndex) {
+              zIndexSetters[i](zIndex);
+              previousZIndex[i] = zIndex;
+            }
           });
         },
       });
@@ -84,11 +113,11 @@ export default function LandingCards() {
       ctx.revert();
       cardsRef.current = [];
     };
-  }, [isMobile]);
+  }, [isMobile, isLiteMode]);
 
   return (
-    <section ref={sectionRef} className={`clay-section ${isMobile ? "clay-section-mobile" : ""}`}>
-      <div className={`clay-sticky ${isMobile ? "clay-sticky-mobile" : ""}`}>
+    <section ref={sectionRef} className={`clay-section ${isMobile || isLiteMode ? "clay-section-mobile" : ""}`}>
+      <div className={`clay-sticky ${isMobile || isLiteMode ? "clay-sticky-mobile" : ""}`}>
         <div className="flex flex-col items-center mb-16 text-center w-full">
          <GradientText
             colors={["#4f772d", "#90a955", "#ecf39e"]}
@@ -110,7 +139,7 @@ export default function LandingCards() {
           <p className="text-[1.2rem] mt-3 text-gray-400 text-center w-full">Few landing page designs</p>
         </div>
 
-        {isMobile ? (
+        {isMobile || isLiteMode ? (
           <div className="clay-stack">
             {images.map((flip, i) => (
               <SuspenseImage
@@ -118,7 +147,7 @@ export default function LandingCards() {
                 src={flip}
                 className="clay-card clay-card-static"
                 alt={`Landing design ${i + 1}`}
-                priority={i < 2}
+                priority={i < 3}
               />
             ))}
           </div>
@@ -134,7 +163,7 @@ export default function LandingCards() {
                   }}
                   className="clay-card"
                   alt={`Landing design ${i + 1}`}
-                  priority={i < 2}
+                  priority={i < 3}
                 />
               ))}
             </div>

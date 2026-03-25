@@ -112,19 +112,34 @@ type SpotifyNode = {
 
 const HobbiesView = ({ items }: { items: GalleryItem[] }) => {
   const [activeNode, setActiveNode] = useState<SpotifyNode | null>(null);
-  const [timeoutRef, setTimeoutRef] = useState<ReturnType<typeof setTimeout> | null>(null);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [isPhone, setIsPhone] = useState(false);
 
   const handleHover = (node: SpotifyNode | null) => {
-    if (timeoutRef) clearTimeout(timeoutRef);
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
     setActiveNode(node);
   };
 
   const handleLeave = () => {
-    const timeout = setTimeout(() => {
+    timeoutRef.current = setTimeout(() => {
       setActiveNode(null);
     }, 200);
-    setTimeoutRef(timeout);
   };
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 767px)");
+    const updatePhone = () => setIsPhone(mediaQuery.matches);
+    updatePhone();
+    mediaQuery.addEventListener("change", updatePhone);
+
+    return () => mediaQuery.removeEventListener("change", updatePhone);
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, []);
 
   return (
     <div className="flex flex-col gap-48">
@@ -220,20 +235,20 @@ const HobbiesView = ({ items }: { items: GalleryItem[] }) => {
             }`}
           >
             {/* LEFT PANEL */}
-            <div className="w-full xl:w-[35%] transition-all duration-300 ease-out">
-              <h4 className="text-2xl font-bold mb-2">
+            <div className="w-full xl:w-[35%] transition-opacity duration-200 ease-out">
+              <h4 className="text-2xl font-bold mb-2 min-h-[3.5rem]">
                 {item.type === "spotify"
                   ? activeNode?.artist || item.title
                   : item.title}
               </h4>
 
-              <p className="text-zinc-500 text-xs uppercase tracking-widest mb-6">
+              <p className="text-zinc-500 text-xs uppercase tracking-widest mb-6 min-h-[1rem]">
                 {item.type === "spotify"
                   ? activeNode?.genre || item.subtitle
                   : item.subtitle}
               </p>
 
-              <p className="text-zinc-400 text-base leading-relaxed mb-10">
+              <p className="text-zinc-400 text-base leading-relaxed mb-10 min-h-[4.5rem] transition-opacity duration-200">
                 {item.type === "spotify"
                   ? activeNode
                     ? `You’ve spent ~${activeNode.value} hours listening to ${activeNode.artist}.`
@@ -272,22 +287,24 @@ const HobbiesView = ({ items }: { items: GalleryItem[] }) => {
             </div>
 
             {/* RIGHT PANEL */}
-            <div className="w-full xl:w-[65%] aspect-square bg-[#0d0d0d] border border-white/5 rounded-[3rem] flex items-center justify-center p-0 xl:p-6 relative overflow-hidden shadow-2xl">
-              <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] to-transparent pointer-events-none" />
+            {!(isPhone && item.type === "spotify") && (
+              <div className="w-full xl:w-[65%] aspect-square bg-[#0d0d0d] border border-white/5 rounded-[3rem] flex items-center justify-center p-0 xl:p-6 relative overflow-hidden shadow-2xl">
+                <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] to-transparent pointer-events-none" />
 
-              {item.type === "spotify" ? (
-                <SpotifyDandelion
-                  onHover={handleHover}
-                  onLeave={handleLeave}
-                />
-              ) : (
-                <SuspenseImage
-                  src={item.imageUrl}
-                  alt={item.title}
-                  className="max-h-full w-auto object-contain rounded-2xl"
-                />
-              )}
-            </div>
+                {item.type === "spotify" ? (
+                  <SpotifyDandelion
+                    onHover={handleHover}
+                    onLeave={handleLeave}
+                  />
+                ) : (
+                  <SuspenseImage
+                    src={item.imageUrl}
+                    alt={item.title}
+                    className="max-h-full w-auto object-contain rounded-2xl"
+                  />
+                )}
+              </div>
+            )}
           </div>
         );
       })}
