@@ -9,12 +9,12 @@ import StayAheadCarousel from "./components/StayAheadCarousel";
 import Designs from "./pages/Designs";
 import SplashCursor from "./components/SplashCursor";
 import ProjectDetail from "./pages/ProjectDetail";
-import { Analytics } from "@vercel/analytics/react"
+import { Analytics } from "@vercel/analytics/react";
 import LandingPageShowcase from "./components/LandingPageShowcase";
 import { useState } from "react";
 import AboutMe from "./pages/AboutMe";
 import Loader from "./components/Loader";
-
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 function App() {
   const [loading, setLoading] = useState(() => {
@@ -26,7 +26,6 @@ function App() {
   });
   return (
     <ThemeProvider>
-
       <AnimatePresence>
         {loading && <Loader onFinish={() => setLoading(false)} />}
       </AnimatePresence>
@@ -60,7 +59,8 @@ function App() {
           </Routes>
         </>
       )}
-   <Analytics />
+      <SpeedInsights />
+      <Analytics />
     </ThemeProvider>
   );
 }
